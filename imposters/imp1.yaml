@@ -1,0 +1,40 @@
+imposter:
+  name: Users
+  description: "APis for having operations on users"
+  type: HTTP
+predicates:
+  - predicate:
+      method: GET
+      path: /users/$id
+      force_response: 400
+      delay: 5s
+    responses:
+      - response:
+          code: 200
+          content: "Hello $id"
+  - predicate:
+      method: PUT
+      path: /users/$id
+      delay: 5s
+    responses:
+      - response:
+          code: 200
+          content: "Update success"
+
+  - predicate:
+      method: DELETE
+      path: /users/$id
+      delay: 5s
+    responses:
+      - response:
+          code: 200
+          content: "Delete success"
+
+  - predicate:
+      method: POST
+      path: /users/$id
+      delay: 5s
+    responses:
+      - response:
+          code: 200
+          content: "Add success"

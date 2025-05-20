@@ -1,0 +1,32 @@
+imposter:
+  name: Orders
+  description: "....."
+  type: HTTP
+predicates:
+  - predicate:
+      method: POST
+      path: /orders
+    responses:
+      - when:
+          header:
+            Content-Type: application/json
+          body:
+            status: new
+        response:
+          code: 201
+          content: "Order created successfully"
+      - when:
+          header:
+            Content-Type: application/xml
+        response:
+          code: 415
+          content: "Unsupported Media Type"
+      - when:
+          body:
+            status: pending
+        response:
+          code: 200
+          content: "Order is in pending state"
+      - response:
+          code: 400
+          content: "Bad request"
