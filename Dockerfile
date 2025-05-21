@@ -10,7 +10,7 @@ LABEL tag="latest"
 
 # Install git, cron, and other dependencies including Java 17, Node.js, kernel headers, and C++ compiler
 RUN apk update && \
-    apk add --no-cache git curl nano bash \
+    apk add --no-cache git curl nano bash
 
 # Set the working directory
 WORKDIR /app
