@@ -249,7 +249,7 @@ function showPredicates(index) {
                     <div class="predicate-text">${delayDisplay}</div>
                     <div class="predicate-input" style="display: none;">
                         <div class="input-group" style="width: 25%;">
-                            <input type="number" class="form-control" value="${p.delay ? p.delay.replace(/[^0-9]/g, '') : ''}" min="0">
+                            <input type="number" class="form-control" value="${p.delay ? p.delay.replace(/[^0-9]/g, '') : '0'}" min="0">
                             <select class="form-select" style="width: auto;">
                                 <option value="ms" ${p.delay?.endsWith('ms') ? 'selected' : ''}>ms</option>
                                 <option value="s" ${p.delay?.endsWith('s') && !p.delay?.endsWith('ms') ? 'selected' : ''}>s</option>
