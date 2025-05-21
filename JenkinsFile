@@ -1,0 +1,76 @@
+pipeline {
+    agent any
+
+    triggers {
+        // Polling the SCM every 5 minutes for any changes
+        pollSCM('H/5 * * * *')  // Adjust the interval as needed
+    }
+
+    environment {
+        // Define Docker registry and image details
+        DOCKER_REGISTRY = 'registry.local'
+        DOCKER_IMAGE = 'mockplant'
+        DOCKER_TAG = 'latest'
+        GIT_REPO = 'http://forgejo.local/Neo/MockPlant.git'
+
+        // Remote server credentials and details
+        REMOTE_SERVER = 'docker-install-server.local'
+        SSH_CREDENTIALS = 'docker-ssh-credentials-id'  // Jenkins SSH credentials ID
+        REMOTE_DIR = '~/mockplant' // Where to clone and build the image
+    }
+
+    stages {
+
+        stage('Login to Remote Server and Build Docker Image') {
+            steps {
+                script {
+                    // SSH into the remote server to create the directory (if it doesn't exist)
+                    sshagent([SSH_CREDENTIALS]) {
+                        sh """
+                            ssh -o StrictHostKeyChecking=no -i ${SSH_CREDENTIALS} root@${REMOTE_SERVER} 'git clone ${GIT_REPO} ${REMOTE_DIR}'
+                            ssh -o StrictHostKeyChecking=no -i ${SSH_CREDENTIALS} root@${REMOTE_SERVER} 'cd ${REMOTE_DIR} && docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG} .'
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Push Docker Image to Registry') {
+            steps {
+                script {
+                    // Push the Docker image to the private registry from the remote server
+                    sshagent([SSH_CREDENTIALS]) {
+                        sh """
+                            ssh -o StrictHostKeyChecking=no -i ${SSH_CREDENTIALS} root@${REMOTE_SERVER} 'docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}'
+                        """
+                    }
+                }
+            }
+        }
+
+        // New Stage to Pull the Docker Image from the Registry
+        stage('Pull Docker Image from Registry') {
+            steps {
+                script {
+                    // Pull the image from the registry to ensure it's available locally
+                    sshagent([SSH_CREDENTIALS]) {
+                        sh """
+                            ssh -o StrictHostKeyChecking=no -i ${SSH_CREDENTIALS} root@${REMOTE_SERVER} 'docker pull ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}'
+                        """
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up on the remote server, if needed (e.g., remove unused images)
+            sshagent([SSH_CREDENTIALS]) {
+                sh """
+                    ssh -o StrictHostKeyChecking=no -i ${SSH_CREDENTIALS} root@${REMOTE_SERVER} 'rm -d -R ${REMOTE_DIR} && docker system prune -af'
+                """
+            }
+        }
+    }
+}
