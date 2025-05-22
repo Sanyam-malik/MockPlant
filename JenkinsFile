@@ -18,8 +18,8 @@ pipeline {
         stage('Detect Branch') {
             steps {
                 script {
-                    // Get the current Git branch
-                    env.BRANCH_NAME = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    // Use GIT_BRANCH environment variable for better reliability
+                    env.BRANCH_NAME = env.GIT_BRANCH ?: sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
                     echo "Detected branch: ${env.BRANCH_NAME}"
 
                     // Convert allowed list to array and check if current branch is allowed
