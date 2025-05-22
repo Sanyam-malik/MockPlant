@@ -2,7 +2,7 @@ pipeline {
     agent { label 'docker' }
 
     triggers {
-        pollSCM('H/5 * * * *') // Optional: replace with webhook later
+        pollSCM('H/5 * * * *') // Optional: use webhook for better efficiency
     }
 
     environment {
@@ -12,12 +12,12 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                // Use HTTP URL for username/password authentication
-                git credentialsId: 'forgejo-id', url: 'http://forgejo.local/Neo/MockPlant.git'
-            }
-        }
+        // Remove this stage: Jenkins already does the checkout for you
+        // stage('Checkout Code') {
+        //     steps {
+        //         git credentialsId: 'forgejo-id', url: 'http://forgejo.local/Neo/MockPlant.git'
+        //     }
+        // }
 
         stage('Build Docker Image') {
             steps {
