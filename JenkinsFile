@@ -22,6 +22,10 @@ pipeline {
                     env.BRANCH_NAME = env.GIT_BRANCH ?: sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
                     echo "Detected branch: ${env.BRANCH_NAME}"
 
+                    // Strip 'origin/' from the branch name if it exists
+                    env.BRANCH_NAME = env.BRANCH_NAME.replaceAll(/^origin\//, '')
+                    echo "Normalized branch: ${env.BRANCH_NAME}"
+
                     // Convert allowed list to array and check if current branch is allowed
                     def allowed = env.ALLOWED_BRANCHES.tokenize(',')
                     env.IS_ALLOWED_BRANCH = allowed.contains(env.BRANCH_NAME).toString()
