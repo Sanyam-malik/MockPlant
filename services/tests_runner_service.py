@@ -1,5 +1,7 @@
 import os
 import json
+import re
+import time
 import unittest
 import requests
 from io import StringIO
@@ -28,9 +30,11 @@ class TestRunnerService:
             url = test_case["url"]
             headers = test_case.get("headers", {})
             body = test_case.get("body", {})
+            delay = test_case.get("delay", None)
             expected_code = test_case["expected_code"]
             expected_text = test_case["expected_text"]
 
+            start_time = time.time()
             if method == "GET":
                 response = requests.get(url, headers=headers)
             elif method == "POST":
@@ -38,11 +42,29 @@ class TestRunnerService:
                     response = requests.post(url, headers=headers, json=body)
                 else:
                     response = requests.post(url, headers=headers, json=body)
+            elif method == "PUT":
+                if "json" in headers.get("Content-Type", ""):
+                    response = requests.put(url, headers=headers, json=body)
+                else:
+                    response = requests.put(url, headers=headers, json=body)
+            elif method == "DELETE":
+                if "json" in headers.get("Content-Type", ""):
+                    response = requests.delete(url, headers=headers)
+                else:
+                    response = requests.delete(url, headers=headers)
             else:
+                response = None
                 self.fail(f"Unsupported HTTP method: {method}")
+            end_time = time.time()
+            response_time = end_time - start_time
 
             self.assertEqual(response.status_code, expected_code)
             self.assertEqual(response.text, expected_text)
+            if delay is not None and delay > 0:
+                # Adding 10ms Overhead
+                delay = delay + 0.01
+                self.assertLessEqual(response_time, delay,
+                                     f"Response took too long: {response_time:.3f}s > {delay}s")
         return test
 
     def _inject_tests(self, cases):
@@ -63,11 +85,15 @@ class TestRunnerService:
         result = runner.run(suite)
 
         if hasattr(result, "test_results"):
+            result.test_results = sorted(result.test_results, key=lambda x: extract_number(x['name']))
             with open(self.results_path, "w") as f:
-                json.dump(result.test_results, f, indent=2)
+                json.dump(result.test_results, f, indent=2, sort_keys=False)
 
         return result.test_results
 
+def extract_number(name):
+    match = re.search(r'\d+', name)
+    return int(match.group()) if match else 0
 
 class _JSONTestResult(unittest.TextTestResult):
     def __init__(self, *args, **kwargs):

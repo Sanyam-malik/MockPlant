@@ -9,10 +9,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;color: limegreen;">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <h4 id="loader-txt" style="padding-left: 10px;">Loading...</h4>
+  </div>
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
-      <div class="col-md-3 scrollable" id="sidebar">
+      <div class="col-md-3" id="sidebar">
         <div class="d-flex justify-content-between align-items-center mt-3 px-2">
           <h4 onclick="showPredicates()" style="cursor: pointer;">Imposters</h4>
           <div class="form-check form-switch">
@@ -52,7 +59,7 @@
           </div>
         </div>
 
-        <ul class="list-group px-2" id="imposter-list"></ul>
+        <ul class="list-group scrollable px-2" id="imposter-list"></ul>
       </div>
 
       <!-- Main Content -->

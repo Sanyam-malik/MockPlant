@@ -7,6 +7,7 @@ class ImposterMetadata:
     name: str
     description: Optional[str] = ""
     type: str = "HTTP"
+    file: Optional[str] = ""
 
 @dataclass
 class Response:

@@ -5,6 +5,7 @@ import re
 from services.constant_service import BASE_URL, TESTS_FILE
 from services.fallback_service import fallback_responses
 from services.loading_service import imposters
+from services.time_service import TimeConverterService
 
 
 def substitute_path_variables(path, path_vars=None):
@@ -46,13 +47,17 @@ def collect_test_cases():
                 dynamic_tests = create_tests_for_dynamic_responses(imposter_name, imposter_type, predicate)
                 test_cases.extend(dynamic_tests)
 
+    test_index = 0
+    for test in test_cases:
+        test_index = test_index + 1
+        test["name"] = f"test_{test_index}"
     return test_cases
 
 def create_tests_for_forced_responses(imposter_name, imposter_type, predicate, force_response):
     test_cases = []
     method = predicate.method
     path = predicate.path
-    test_index=0
+    delay = TimeConverterService.to_seconds(predicate.delay) if predicate.delay else None
 
     for resp in predicate.responses:
         when = resp.when
@@ -70,39 +75,37 @@ def create_tests_for_forced_responses(imposter_name, imposter_type, predicate, f
 
         test_case = {
             "imposter": imposter_type,
-            "name": f"test_{test_index}_{imposter_name}",
             "method": method,
             "path": path,
             "url": build_url(path, imposter_type, when.get("path"), when.get("query")),
             "headers": when.get("header", {}),
             "body": when.get("body", {}),
+            "delay": delay,
             "expected_code": code,
             "expected_text": expected_text
         }
         test_cases.append(test_case)
-        test_index += 1
 
     if len(test_cases) == 0:
         test_case = {
             "imposter": imposter_type,
-            "name": f"test_{test_index}_{imposter_name}",
             "method": method,
             "path": path,
             "url": build_url(path, imposter_type),
             "headers": {},
             "body": {},
+            "delay": delay,
             "expected_code": force_response,
             "expected_text": fallback_responses.get(force_response)
         }
         test_cases.append(test_case)
-        test_index += 1
     return test_cases
 
 def create_tests_for_dynamic_responses(imposter_name, imposter_type, predicate):
     test_cases = []
     method = predicate.method
     path = predicate.path
-    test_index = 0
+    delay = TimeConverterService.to_seconds(predicate.delay) if predicate.delay else None
 
     for resp in predicate.responses:
         when = resp.when
@@ -117,17 +120,16 @@ def create_tests_for_dynamic_responses(imposter_name, imposter_type, predicate):
 
         test_case = {
             "imposter": imposter_type,
-            "name": f"test_{test_index}_{imposter_name}",
             "method": method,
             "path": path,
             "url": build_url(path, imposter_type, when.get("path"), when.get("query")),
             "headers": when.get("header", {}),
             "body": when.get("body", {}),
+            "delay": delay,
             "expected_code": code,
             "expected_text": expected_text
         }
         test_cases.append(test_case)
-        test_index += 1
     return test_cases
 
 def generate_tests():

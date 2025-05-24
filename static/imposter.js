@@ -1,6 +1,16 @@
 // Global state
 let impostersData = [];
 
+function showLoader(txt) {
+    const loaderText = txt || "Loading...";
+    document.getElementById("loader-txt").textContent = loaderText;
+    document.getElementById("loader").style.display = "flex";
+}
+
+function hideLoader() {
+    document.getElementById("loader").style.display = "none";
+}
+
 // Utility functions
 function showCommonModal({
     title,
@@ -73,10 +83,6 @@ const showError = (message) => {
     console.error(message);
 };
 
-const showLoading = (element) => {
-    element.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"></div></div>';
-};
-
 // Background gradient management
 const getBalancedColor = () => {
     // Generate balanced colors with darker tones
@@ -97,8 +103,9 @@ setRandomGradient();
 setInterval(setRandomGradient, 15000); // Change every 15s
 
 // AJAX wrapper
-const fetchData = async (url, options = {}) => {
+const fetchData = async (url, options = {}, txt) => {
     try {
+        showLoader(txt);
         const response = await fetch(url, {
             ...options,
             headers: {
@@ -110,10 +117,11 @@ const fetchData = async (url, options = {}) => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+        hideLoader();
         return await response.json();
     } catch (error) {
-        showError(`Failed to fetch data: ${error.message}`);
+        //showError(`Failed to fetch data: ${error.message}`);
+        hideLoader();
         throw error;
     }
 };
@@ -159,15 +167,23 @@ function showPredicates(index) {
 
     // Update title to show name and description in separate lines
     title.innerHTML = `
-        <div class="imposter-name">${imposter.imposter.name}</div>
+        <div class="imposter-name">
+            ${imposter.imposter.name}
+            <button class="btn btn-danger delete-imposter" data-index="${index}">
+                 <i class="fa-solid fa-trash"></i>
+                 &nbsp;Delete
+            </button>
+        </div>
         <div class="imposter-description text-muted">${imposter.imposter.description || 'No description'}</div>
     `;
     list.innerHTML = '';
 
     if (imposter.predicates.length === 0) {
         list.innerHTML = '<li class="list-group-item">No predicates found.</li>';
+        setupImposterListeners(imposter, index);
         return;
     }
+
 
     // Create accordion for predicates
     const accordion = document.createElement('div');
@@ -353,7 +369,7 @@ function showPredicates(index) {
                 }
                 
                 details += `
-                    <div class="mt-3 p-3 border rounded">
+                    <div class="mt-3 p-3 border rounded response-item">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h6 class="mb-0">Response ${respIdx + 1}</h6>
                             <div class="btn-group">
@@ -478,7 +494,30 @@ function showPredicates(index) {
     list.appendChild(accordion);
 
     // Add event listeners for edit and delete buttons
+    setupImposterListeners(imposter, index);
     setupPredicateEventListeners(imposter, index);
+}
+
+function setupImposterListeners(imposter, imposterIndex) {
+    // Delete imposter
+    document.querySelectorAll('.delete-imposter').forEach(button => {
+        button.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            showCommonModal({
+                title: 'Confirm Delete',
+                message: 'Are you sure you want to delete this imposter?',
+                type: 'danger',
+                confirmText: 'Delete',
+                cancelText: 'Cancel',
+                onConfirm: async () => {
+                    const idx = parseInt(e.target.closest('.delete-imposter').dataset.index);
+                    imposter.predicates.splice(idx, 1);
+                    await deleteImposter(imposterIndex);
+                    showPredicates(imposterIndex);
+                }
+            });
+        });
+    });
 }
 
 function setupPredicateEventListeners(imposter, imposterIndex) {
@@ -509,27 +548,15 @@ function setupPredicateEventListeners(imposter, imposterIndex) {
                     // Update the value
                     const fieldName = field.dataset.field;
                     let value = null;
-
                     if (fieldName === 'delay') {
                         const numberInput = input.querySelector('input');
                         const unitSelect = input.querySelector('select');
                         const number = parseInt(numberInput.value);
                         if (!isNaN(number) && number > 0) {
-                            switch (unitSelect.value) {
-                                case 'ms':
-                                    value = number;
-                                    break;
-                                case 's':
-                                    value = number * 1000;
-                                    break;
-                                case 'm':
-                                    value = number * 60000;
-                                    break;
-                                case 'h':
-                                    value = number * 3600000;
-                                    break;
-                            }
+                            value = `${number}${unitSelect.value}`;
                         }
+                    } else if(fieldName === 'force_response') {
+                        value = parseInt(input.value.trim());
                     } else {
                         value = input.value.trim();
                     }
@@ -537,25 +564,14 @@ function setupPredicateEventListeners(imposter, imposterIndex) {
                     imposter.predicates[idx][fieldName] = value || null;
                     
                     // Update display text
-                    if (fieldName === 'delay' && value) {
-                        if (value >= 3600000) {
-                            text.textContent = `${Math.floor(value / 3600000)}h`;
-                        } else if (value >= 60000) {
-                            text.textContent = `${Math.floor(value / 60000)}m`;
-                        } else if (value >= 1000) {
-                            text.textContent = `${Math.floor(value / 1000)}s`;
-                        } else {
-                            text.textContent = `${value}ms`;
-                        }
-                    } else {
-                        text.textContent = value || 'Not set';
-                    }
-                    
-                    // Save changes
-                    updateImposter(imposterIndex, imposter);
+                    text.textContent = value || 'Not set';
                     e.target.closest('.edit-predicate').classList.remove('active');
                 }
             });
+            // Save changes
+            if(isEditing) {
+                updateImposter(imposterIndex, imposter);
+            }
         });
     });
 
@@ -580,22 +596,29 @@ function setupPredicateEventListeners(imposter, imposterIndex) {
                 } else {
                     text.style.display = 'block';
                     input.style.display = 'none';
-                    
+
+
                     const fieldName = field.dataset.field;
-                    const value = input.value.trim();
+                    var value = input.value.trim();
                     
                     // Update the response object
                     if (!imposter.predicates[predicateIdx].responses[responseIdx].response) {
                         imposter.predicates[predicateIdx].responses[responseIdx].response = {};
                     }
+
+                    if(fieldName === "code") {
+                        value = parseInt(value);
+                    }
                     imposter.predicates[predicateIdx].responses[responseIdx].response[fieldName] = value || null;
                     text.textContent = value || 'Not set';
-                    
-                    // Save changes
-                    updateImposter(imposterIndex, imposter);
+
                     e.target.closest('.edit-response').classList.remove('active');
                 }
             });
+            // Save changes
+            if(isEditing) {
+                updateImposter(imposterIndex, imposter);
+            }
         });
     });
 
@@ -677,6 +700,25 @@ async function updateImposter(index, imposterData) {
     }
 }
 
+
+async function deleteImposter(index) {
+    try {
+        await fetchData(`/_imposters/${index}`, {
+            method: 'DELETE'
+        });
+        await fetchImposters();
+        return true;
+    } catch (error) {
+        showCommonModal({
+            title: 'Delete Failed',
+            message: 'Failed to delete imposter. Please try again.',
+            type: 'danger',
+            confirmText: 'OK'
+        });
+        return false;
+    }
+}
+
 // Data Management
 async function fetchImposters() {
     const list = document.getElementById('imposter-list');
@@ -687,9 +729,8 @@ async function fetchImposters() {
         list.innerHTML = '';
         impostersData.forEach((i, index) => {
             const li = document.createElement('li');
-            li.className = 'list-group-item list-group-item-action';
-            li.textContent = i.imposter.name;
-            li.style.cursor = 'pointer';
+            li.className = 'list-group-item list-group-item-action imposter-item';
+            li.innerHTML = `<i class="fa-solid fa-cube"></i><span style="margin-left: .5rem;">${i.imposter.name}</span>`;
             li.onclick = () => showPredicates(index);
             list.appendChild(li);
         });
@@ -730,14 +771,13 @@ async function runTests() {
     const casesOutput = document.getElementById('cases-output');
 
     try {
-        const [results, cases] = await Promise.all([
-            fetchData('/_tests'),
-            fetchData('/_tests/cases')
-        ]);
+        const result = await fetchData('/_tests', {}, "Running Tests...");
+        tests = result["tests"];
+        cases = result["cases"];
 
         // Update test results table
         outputTable.innerHTML = '';
-        results.forEach(test => {
+        tests.forEach(test => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${test.name}</td>

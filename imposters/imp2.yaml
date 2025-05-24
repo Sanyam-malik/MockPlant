@@ -1,24 +1,23 @@
 imposter:
   name: Products
-  description: "....."
   type: HTTP
 predicates:
   - predicate:
       method: GET
       path: /products
     responses:
-      - when:
+      - response:
+          code: 200
+          content: Electronics products list
+        when:
           query:
             category: electronics
-        response:
+      - response:
           code: 200
-          content: "Electronics products list"
-      - when:
+          content: Clothing products list
+        when:
           query:
             category: clothing
-        response:
-          code: 200
-          content: "Clothing products list"
       - response:
           code: 400
-          content: "Invalid category"
+          content: Invalid category

@@ -1,0 +1,243 @@
+[
+  {
+    "imposter": "HTTP",
+    "method": "GET",
+    "path": "/products",
+    "url": "http://127.0.0.1:5000/products?category=electronics",
+    "headers": {},
+    "body": {},
+    "delay": null,
+    "expected_code": 200,
+    "expected_text": "Electronics products list",
+    "name": "test_1"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "GET",
+    "path": "/products",
+    "url": "http://127.0.0.1:5000/products?category=clothing",
+    "headers": {},
+    "body": {},
+    "delay": null,
+    "expected_code": 200,
+    "expected_text": "Clothing products list",
+    "name": "test_2"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "GET",
+    "path": "/products",
+    "url": "http://127.0.0.1:5000/products",
+    "headers": {},
+    "body": {},
+    "delay": null,
+    "expected_code": 400,
+    "expected_text": "Invalid category",
+    "name": "test_3"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/orders",
+    "url": "http://127.0.0.1:5000/orders",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "status": "new"
+    },
+    "delay": 0.045,
+    "expected_code": 201,
+    "expected_text": "Order created successfully",
+    "name": "test_4"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/orders",
+    "url": "http://127.0.0.1:5000/orders",
+    "headers": {
+      "Content-Type": "application/xml"
+    },
+    "body": {},
+    "delay": 0.045,
+    "expected_code": 415,
+    "expected_text": "Unsupported Media Type",
+    "name": "test_5"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/orders",
+    "url": "http://127.0.0.1:5000/orders",
+    "headers": {},
+    "body": {
+      "status": "pending"
+    },
+    "delay": 0.045,
+    "expected_code": 200,
+    "expected_text": "Order is in pending state",
+    "name": "test_6"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/orders",
+    "url": "http://127.0.0.1:5000/orders",
+    "headers": {},
+    "body": {},
+    "delay": 0.045,
+    "expected_code": 400,
+    "expected_text": "Bad request",
+    "name": "test_7"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/orders2",
+    "url": "http://127.0.0.1:5000/orders2",
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Request-Source": "mobile-app"
+    },
+    "body": {
+      "status": "new",
+      "priority": "high"
+    },
+    "delay": null,
+    "expected_code": 201,
+    "expected_text": "High priority order created from mobile app",
+    "name": "test_8"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/orders2",
+    "url": "http://127.0.0.1:5000/orders2",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "status": "new",
+      "priority": "low"
+    },
+    "delay": null,
+    "expected_code": 202,
+    "expected_text": "Low priority order accepted",
+    "name": "test_9"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/orders2",
+    "url": "http://127.0.0.1:5000/orders2",
+    "headers": {
+      "Content-Type": "application/xml",
+      "X-API-Version": "1.0"
+    },
+    "body": {},
+    "delay": null,
+    "expected_code": 415,
+    "expected_text": "Unsupported Media Type for this API version",
+    "name": "test_10"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/orders2",
+    "url": "http://127.0.0.1:5000/orders2",
+    "headers": {},
+    "body": {
+      "status": "pending",
+      "user": "guest"
+    },
+    "delay": null,
+    "expected_code": 200,
+    "expected_text": "Pending order from guest user",
+    "name": "test_11"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/orders2",
+    "url": "http://127.0.0.1:5000/orders2",
+    "headers": {},
+    "body": {},
+    "delay": null,
+    "expected_code": 400,
+    "expected_text": "Bad request",
+    "name": "test_12"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "GET",
+    "path": "/users/$id",
+    "url": "http://127.0.0.1:5000/users/123",
+    "headers": {},
+    "body": {},
+    "delay": null,
+    "expected_code": 400,
+    "expected_text": "Bad Request: MockPlant Generic Response",
+    "name": "test_13"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "PUT",
+    "path": "/users/$id",
+    "url": "http://127.0.0.1:5000/users/123",
+    "headers": {},
+    "body": {},
+    "delay": null,
+    "expected_code": 200,
+    "expected_text": "Update success",
+    "name": "test_14"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "DELETE",
+    "path": "/users/$id",
+    "url": "http://127.0.0.1:5000/users/123",
+    "headers": {},
+    "body": {},
+    "delay": null,
+    "expected_code": 200,
+    "expected_text": "Delete success",
+    "name": "test_15"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "POST",
+    "path": "/users/$id",
+    "url": "http://127.0.0.1:5000/users/123",
+    "headers": {},
+    "body": {},
+    "delay": null,
+    "expected_code": 200,
+    "expected_text": "Add success",
+    "name": "test_16"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "GET",
+    "path": "/users2/$id",
+    "url": "http://127.0.0.1:5000/users2/456",
+    "headers": {},
+    "body": {},
+    "delay": 1.0,
+    "expected_code": 200,
+    "expected_text": "Hello user with 456",
+    "name": "test_17"
+  },
+  {
+    "imposter": "HTTP",
+    "method": "GET",
+    "path": "/users2/$id/$user",
+    "url": "http://127.0.0.1:5000/users2/456/123",
+    "headers": {},
+    "body": {},
+    "delay": null,
+    "expected_code": 200,
+    "expected_text": "Hello 123 with 456",
+    "name": "test_18"
+  }
+]

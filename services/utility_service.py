@@ -1,5 +1,4 @@
 import json
-
 import yaml
 
 
@@ -11,4 +10,4 @@ def yaml_to_json(yaml_str: str) -> str:
 def json_to_yaml(json_str: str) -> str:
     """Converts a JSON string to a YAML string."""
     data = json.loads(json_str)
-    return yaml.dump(data, sort_keys=False)
+    return yaml.dump(data, sort_keys=False, indent=2)

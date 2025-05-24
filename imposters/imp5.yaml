@@ -1,25 +1,25 @@
 imposter:
   name: Users2
-  description: "....."
   type: HTTP
 predicates:
   - predicate:
       method: GET
       path: /users2/$id
+      delay: 1s
     responses:
-      - when:
+      - response:
+          code: 200
+          content: Hello user with $id
+        when:
           path:
             id: 456
-        response:
-          code: 200
-          content: "Hello user with $id"
   - predicate:
       method: GET
       path: /users2/$id/$user
     responses:
-      - when:
+      - response:
+          code: 200
+          content: Hello $user with $id
+        when:
           path:
             id: 456
-        response:
-          code: 200
-          content: "Hello $user with $id"

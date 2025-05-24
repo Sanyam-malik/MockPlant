@@ -6,7 +6,7 @@ from flask import Blueprint, request, jsonify, render_template
 from services.api_call_service import call_api
 from services.constant_service import AUTO_CREATE_TESTS
 from services.loading_service import load_yaml_imposters, add_yaml_imposter, list_yaml_imposters, parse_imposter_yaml, \
-    imposters
+    imposters, save_imposter, delete_imposter
 from services.handler_service import handle_request
 from services.tests_generator_service import generate_tests, get_tests
 from services.tests_runner_service import TestRunnerService
@@ -28,7 +28,10 @@ def index():
 @api_bp.route('/_imposters', methods=['POST'])
 def add_imposter_route():
     data = request.get_json()
+    data["imposter"]["file"] = f"imp{len(imposters)+1}.yaml"
+    imposter = parse_imposter_yaml(data)
     add_yaml_imposter(data)
+    save_imposter(imposter)
     return jsonify({"message": "Imposter Added"}), 201
 
 # API Route to list all imposters
@@ -42,20 +45,28 @@ def update_imposter_route(index):
     data = request.get_json()
     try:
         imposters[index] = parse_imposter_yaml(data)
+        save_imposter(imposters[index])
         return jsonify({"message": "Imposter Updated"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": str(e)}), 500
+
+# API Route to update an imposter
+@api_bp.route('/_imposters/<int:index>', methods=['DELETE'])
+def delete_imposter_route(index):
+    try:
+        delete_imposter(imposters[index])
+        return jsonify({"message": "Imposter Updated"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # API Route to run tests for imposters
 @api_bp.route('/_tests', methods=['GET'])
 def test_imposters():
-    results = TestRunnerService().run_tests()
-    return jsonify(results)
-
-# API Route to run tests for imposters
-@api_bp.route('/_tests/cases', methods=['GET'])
-def test_case_imposters():
-    return jsonify(get_tests())
+    response = {
+        "tests": TestRunnerService().run_tests(),
+        "cases": get_tests()
+    }
+    return jsonify(response)
 
 @api_bp.route('/_record', methods=['POST'])
 def record():

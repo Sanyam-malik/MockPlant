@@ -109,7 +109,32 @@ body {
     box-shadow: none;
 }
 
+.list-group {
+  height: 85vh !important;
+}
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9); /* semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1055; /* above most Bootstrap elements */
+}
+
+.response-item {
+    background-color: #f4f4f4e0;
+}
+
 .dark-mode .accordion-body pre {
+    background-color: #131313e0;
+}
+
+.dark-mode .response-item {
     background-color: #131313e0;
 }
 
@@ -127,6 +152,8 @@ body {
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
+    justify-content: space-between;
+    display: flex;
 }
 
 .imposter-description {
@@ -143,6 +170,12 @@ body {
     border-color: transparent;
 }
 
+.imposter-item {
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+}
+
 .table {
     background: transparent;
     border-color: transparent;
@@ -155,7 +188,11 @@ body {
 .scrollable {
   overflow-y: auto;
   height: 100vh;
-  padding-bottom: 20px;
+}
+
+#loader-txt {
+    color: white;
+    margin: auto 0;
 }
 
 #sidebar {
@@ -165,11 +202,13 @@ body {
 
 #main-content {
   background-color: transparent;
+  padding-bottom: 2rem;
 }
 
 #main-content-test {
   background-color: transparent;
   display: none;
+  padding-bottom: 2rem;
 }
 
 #modeToggle {
@@ -262,7 +301,7 @@ pre {
 }
 
 .container-fluid {
-    background: rgba(232, 225, 225, 0.56);
+    background: rgba(232, 225, 225, 0.36);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
