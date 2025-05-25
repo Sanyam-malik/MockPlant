@@ -5,6 +5,7 @@ predicates:
   - predicate:
       method: GET
       path: /products
+      delay: 4ms
     responses:
       - response:
           code: 200

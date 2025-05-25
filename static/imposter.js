@@ -1,144 +1,25 @@
 // Global state
 let impostersData = [];
 
-function showLoader(txt) {
-    const loaderText = txt || "Loading...";
-    document.getElementById("loader-txt").textContent = loaderText;
-    document.getElementById("loader").style.display = "flex";
-}
-
-function hideLoader() {
-    document.getElementById("loader").style.display = "none";
-}
-
-// Utility functions
-function showCommonModal({
-    title,
-    message,
-    type = 'primary',
-    confirmText = 'OK',
-    cancelText = null,
-    onConfirm = null,
-    onCancel = null,
-    size = 'md'
-}) {
-    const modalHtml = `
-        <div class="modal fade" id="commonModal" tabindex="-1" aria-labelledby="commonModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-${size}">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="commonModalLabel">${title}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ${message}
-                    </div>
-                    <div class="modal-footer">
-                        ${cancelText ? `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${cancelText}</button>` : ''}
-                        <button type="button" class="btn btn-${type}" id="commonModalConfirmBtn">${confirmText}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
-    // Remove existing modal if any
-    const existingModal = document.getElementById('commonModal');
-    if (existingModal) {
-        existingModal.remove();
-    }
-
-    // Add new modal to body
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-
-    // Show the modal
-    const modal = new bootstrap.Modal(document.getElementById('commonModal'));
-    modal.show();
-
-    // Handle confirmation
-    const confirmBtn = document.getElementById('commonModalConfirmBtn');
-    confirmBtn.addEventListener('click', () => {
-        if (onConfirm) {
-            onConfirm();
-        }
-        modal.hide();
-    });
-
-    // Handle cancellation
-    if (onCancel) {
-        const modalElement = document.getElementById('commonModal');
-        modalElement.addEventListener('hidden.bs.modal', () => {
-            onCancel();
-        });
-    }
-}
-
-const showError = (message) => {
-    showCommonModal({
-        title: 'Error',
-        message: message,
-        type: 'danger',
-        confirmText: 'OK'
-    });
-    console.error(message);
-};
-
-// Background gradient management
-const getBalancedColor = () => {
-    // Generate balanced colors with darker tones
-    const r = Math.floor(50 + Math.random() * 205); // 50-255
-    const g = Math.floor(50 + Math.random() * 205); // 50-255
-    const b = Math.floor(50 + Math.random() * 205); // 50-255
-    return `rgb(${r}, ${g}, ${b})`;
-};
-
-const setRandomGradient = () => {
-    const colors = Array.from({ length: 4 }, () => getBalancedColor());
-    document.body.style.background = `linear-gradient(-45deg, ${colors.join(', ')})`;
-    document.body.style.backgroundSize = '400% 400%';
-};
-
-// Initialize gradient background
-setRandomGradient();
-setInterval(setRandomGradient, 15000); // Change every 15s
-
-// AJAX wrapper
-const fetchData = async (url, options = {}, txt) => {
-    try {
-        showLoader(txt);
-        const response = await fetch(url, {
-            ...options,
-            headers: {
-                'Content-Type': 'application/json',
-                ...options.headers
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        hideLoader();
-        return await response.json();
-    } catch (error) {
-        //showError(`Failed to fetch data: ${error.message}`);
-        hideLoader();
-        throw error;
-    }
-};
-
 // UI Management
 function switchMainContent(force_content) {
     const predicateSection = document.getElementById('main-content');
     const testSection = document.getElementById('main-content-test');
+    const apiSection = document.getElementById('main-content-api');
 
+    // Hide all sections first
+    predicateSection.style.display = "none";
+    testSection.style.display = "none";
+    apiSection.style.display = "none";
+
+    // Show the requested section
     if (force_content === "test") {
         testSection.style.display = "block";
-        predicateSection.style.display = "none";
-        return;
+    } else if (force_content === "api") {
+        apiSection.style.display = "block";
+    } else {
+        predicateSection.style.display = "block";
     }
-    
-    testSection.style.display = "none";
-    predicateSection.style.display = "block";
 }
 
 function showPredicates(index) {
@@ -179,11 +60,10 @@ function showPredicates(index) {
     list.innerHTML = '';
 
     if (imposter.predicates.length === 0) {
-        list.innerHTML = '<li class="list-group-item">No predicates found.</li>';
+        list.innerHTML = '<li class="list-group-item py-3 px-3">No predicates found.</li>';
         setupImposterListeners(imposter, index);
         return;
     }
-
 
     // Create accordion for predicates
     const accordion = document.createElement('div');
@@ -234,7 +114,7 @@ function showPredicates(index) {
                 <div class="d-flex justify-content-between align-items-center w-100">
                     <label class="form-label"><strong>Method:</strong></label>
                     <div class="btn-group">
-                        <button class="btn btn-sm btn-teal edit-predicate" data-index="${idx}">
+                        <button class="btn btn-sm btn-purple edit-predicate" data-index="${idx}">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                         <button class="btn btn-sm btn-danger delete-predicate" data-index="${idx}">
@@ -373,7 +253,7 @@ function showPredicates(index) {
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h6 class="mb-0">Response ${respIdx + 1}</h6>
                             <div class="btn-group">
-                                <button class="btn btn-sm btn-teal edit-response" data-predicate="${idx}" data-response="${respIdx}">
+                                <button class="btn btn-sm btn-purple edit-response" data-predicate="${idx}" data-response="${respIdx}">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                                 <button class="btn btn-sm btn-danger delete-response" data-predicate="${idx}" data-response="${respIdx}">
@@ -477,7 +357,7 @@ function showPredicates(index) {
         // Add button to add new response
         details += `
             <div class="mt-3">
-                <button class="btn btn-purple add-response" data-predicate="${idx}">
+                <button class="btn btn-teal add-response" data-predicate="${idx}">
                     <i class="fa-solid fa-plus"></i> Add Response
                 </button>
             </div>
@@ -493,9 +373,24 @@ function showPredicates(index) {
 
     list.appendChild(accordion);
 
+    // Add the "Add Predicate" button at the bottom
+    const addButtonContainer = document.createElement('div');
+    addButtonContainer.className = 'mt-4';
+    addButtonContainer.innerHTML = `
+        <button class="btn btn-purple add-predicate" data-index="${index}">
+            <i class="fa-solid fa-plus"></i> Add Predicate
+        </button>
+    `;
+    list.appendChild(addButtonContainer);
+
     // Add event listeners for edit and delete buttons
     setupImposterListeners(imposter, index);
     setupPredicateEventListeners(imposter, index);
+
+    // Add event listener for the Add Predicate button
+    document.querySelector('.add-predicate').addEventListener('click', () => {
+        showAddPredicateModal(index);
+    });
 }
 
 function setupImposterListeners(imposter, imposterIndex) {
@@ -767,44 +662,81 @@ async function createImposter(formData) {
 
 async function runTests() {
     switchMainContent("test");
-    const outputTable = document.getElementById('test-output');
-    const casesOutput = document.getElementById('cases-output');
+    const testSection = document.getElementById('main-content-test');
+    testSection.innerHTML = '<h1 class="mt-3 px-2">Test Output</h1>';
 
     try {
         const result = await fetchData('/_tests', {}, "Running Tests...");
         tests = result["tests"];
         cases = result["cases"];
 
-        // Update test results table
-        outputTable.innerHTML = '';
-        tests.forEach(test => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${test.name}</td>
-                <td class="${test.status === 'Pass' ? 'text-success fw-bold' : 'text-danger fw-bold'}">${test.status}</td>
+        // Create accordion container
+        const accordion = document.createElement('div');
+        accordion.className = 'accordion mt-3 px-2';
+        accordion.id = 'testAccordion';
+
+        // Create accordion items for each test
+        tests.forEach((test, index) => {
+            const accordionItem = document.createElement('div');
+            accordionItem.className = 'accordion-item';
+            
+            // Create header with test name and status
+            const header = document.createElement('h2');
+            header.className = 'accordion-header';
+            header.id = `headingTest${index}`;
+            
+            const button = document.createElement('button');
+            button.className = 'accordion-button collapsed';
+            button.type = 'button';
+            button.setAttribute('data-bs-toggle', 'collapse');
+            button.setAttribute('data-bs-target', `#collapseTest${index}`);
+            button.setAttribute('aria-expanded', 'false');
+            button.setAttribute('aria-controls', `collapseTest${index}`);
+            
+            // Add test name and status to header
+            const headerContent = document.createElement('div');
+            headerContent.className = 'd-flex justify-content-between align-items-center w-100';
+            headerContent.innerHTML = `
+                <span>${test.name}</span>
+                <span class="${test.status === 'Pass' ? 'text-success fw-bold' : 'text-danger fw-bold'}">${test.status}</span>
             `;
-            outputTable.appendChild(row);
+            button.appendChild(headerContent);
+            header.appendChild(button);
+            
+            // Create accordion body with test details
+            const collapse = document.createElement('div');
+            collapse.id = `collapseTest${index}`;
+            collapse.className = 'accordion-collapse collapse';
+            collapse.setAttribute('aria-labelledby', `headingTest${index}`);
+            collapse.setAttribute('data-bs-parent', '#testAccordion');
+            
+            const body = document.createElement('div');
+            body.className = 'accordion-body';
+            
+            // Find corresponding test case
+            const testCase = cases.find(c => c.name === test.name);
+            if (testCase) {
+                body.innerHTML = `
+                    <pre class="p-2 border rounded">
+Method: ${testCase.method}
+URL: ${testCase.url}
+Path: ${testCase.path}
+Headers: ${JSON.stringify(testCase.headers, null, 2)}
+Body: ${JSON.stringify(testCase.body, null, 2)}
+Expected Code: ${testCase.expected_code}
+Expected Text: ${testCase.expected_text}
+                    </pre>
+                `;
+            }
+            
+            collapse.appendChild(body);
+            accordionItem.appendChild(header);
+            accordionItem.appendChild(collapse);
+            accordion.appendChild(accordionItem);
         });
 
-        // Update test case details
-        casesOutput.innerHTML = '';
-        cases.forEach(test => {
-            const block = document.createElement('div');
-            block.className = 'mb-3';
-            block.innerHTML = `
-                <strong class="d-block mb-2">${test.name}</strong>
-                <pre class="p-2 border rounded">
-Method: ${test.method}
-URL: ${test.url}
-Path: ${test.path}
-Headers: ${JSON.stringify(test.headers, null, 2)}
-Body: ${JSON.stringify(test.body, null, 2)}
-Expected Code: ${test.expected_code}
-Expected Text: ${test.expected_text}
-                </pre>
-            `;
-            casesOutput.appendChild(block);
-        });
+        testSection.appendChild(accordion);
+
     } catch (error) {
         showCommonModal({
             title: 'Test Error',
@@ -812,8 +744,7 @@ Expected Text: ${test.expected_text}
             type: 'danger',
             confirmText: 'OK'
         });
-        outputTable.innerHTML = '<tr><td colspan="2" class="text-danger">Failed to run tests</td></tr>';
-        casesOutput.innerHTML = '<div class="text-danger">Failed to load test cases</div>';
+        testSection.innerHTML += '<div class="text-danger mt-3 px-2">Failed to run tests</div>';
     }
 }
 
@@ -860,3 +791,198 @@ document.addEventListener('DOMContentLoaded', function() {
 // Initial load
 fetchImposters();
 showPredicates();
+
+function showAddPredicateModal(imposterIndex) {
+    const modalContent = `
+        <form id="addPredicateForm">
+            <div class="mb-3">
+                <label class="form-label">Method</label>
+                <select class="form-select" name="method" required>
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Path</label>
+                <input type="text" class="form-control" name="path" required placeholder="/example/path">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Delay (optional)</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" name="delayValue" min="0" value="0">
+                    <select class="form-select" name="delayUnit" style="width: auto;">
+                        <option value="ms">ms</option>
+                        <option value="s">s</option>
+                        <option value="m">m</option>
+                        <option value="h">h</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Force Response (optional)</label>
+                <select class="form-select" name="force_response">
+                    <option value="">Select Status Code</option>
+                    <optgroup label="2xx Success">
+                        <option value="200">200 OK</option>
+                        <option value="201">201 Created</option>
+                        <option value="202">202 Accepted</option>
+                        <option value="204">204 No Content</option>
+                    </optgroup>
+                    <optgroup label="4xx Client Errors">
+                        <option value="400">400 Bad Request</option>
+                        <option value="401">401 Unauthorized</option>
+                        <option value="403">403 Forbidden</option>
+                        <option value="404">404 Not Found</option>
+                    </optgroup>
+                    <optgroup label="5xx Server Errors">
+                        <option value="500">500 Internal Server Error</option>
+                        <option value="502">502 Bad Gateway</option>
+                        <option value="503">503 Service Unavailable</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Default Response (optional)</label>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <label class="form-label">Status Code</label>
+                            <select class="form-select" name="responseCode">
+                                <option value="200">200 OK</option>
+                                <option value="201">201 Created</option>
+                                <option value="400">400 Bad Request</option>
+                                <option value="404">404 Not Found</option>
+                                <option value="500">500 Internal Server Error</option>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Content</label>
+                            <textarea class="form-control" name="responseContent" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    `;
+
+    showCommonModal({
+        title: 'Add New Predicate',
+        message: modalContent,
+        type: 'purple',
+        confirmText: 'Add',
+        cancelText: 'Cancel',
+        onConfirm: async () => {
+            const form = document.getElementById('addPredicateForm');
+            const formData = new FormData(form);
+            
+            // Create new predicate
+            const newPredicate = {
+                method: formData.get('method'),
+                path: formData.get('path'),
+                force_response: formData.get('force_response') ? parseInt(formData.get('force_response')) : undefined
+            };
+
+            // Add delay if specified
+            const delayValue = parseInt(formData.get('delayValue'));
+            if (delayValue > 0) {
+                newPredicate.delay = `${delayValue}${formData.get('delayUnit')}`;
+            }
+
+            // Add default response if specified
+            const responseContent = formData.get('responseContent');
+            if (responseContent) {
+                newPredicate.response = {
+                    code: parseInt(formData.get('responseCode')),
+                    content: responseContent
+                };
+            }
+
+            // Get current imposter data
+            const imposter = impostersData[imposterIndex];
+            
+            // Add new predicate to imposter's predicates
+            imposter.predicates.push(newPredicate);
+
+            try {
+                const response = await fetch(`/_imposters/${imposterIndex}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(imposter)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to add predicate');
+                }
+
+                // Refresh the predicates view
+                showPredicates(imposterIndex);
+            } catch (error) {
+                showCommonModal({
+                    title: 'Error',
+                    message: error.message,
+                    type: 'danger',
+                    confirmText: 'OK'
+                });
+            }
+        }
+    });
+}
+
+function showCreateImposterModal(prefilledData = null) {
+    const modal = new bootstrap.Modal(document.getElementById('createImposterModal'));
+    
+    // Reset form
+    document.getElementById('createImposterForm').reset();
+    document.getElementById('predicatesAccordion').innerHTML = '';
+    document.getElementById('responsesAccordion').innerHTML = '';
+    
+    // Add initial predicate and response sections
+    addPredicateSection();
+    addResponseSection();
+    
+    // If prefilled data is provided, populate the form
+    if (prefilledData) {
+        document.getElementById('imposterName').value = prefilledData.name;
+        document.getElementById('imposterDescription').value = prefilledData.description;
+        
+        // Clear initial sections
+        document.getElementById('predicatesAccordion').innerHTML = '';
+        document.getElementById('responsesAccordion').innerHTML = '';
+        
+        // Add predicate
+        if (prefilledData.predicates && prefilledData.predicates.length > 0) {
+            const predicate = prefilledData.predicates[0];
+            const predicateSection = addPredicateSection();
+            const methodSelect = predicateSection.querySelector('[name="method"]');
+            const pathInput = predicateSection.querySelector('[name="path"]');
+            const queryInput = predicateSection.querySelector('[name="query"]');
+            const headersInput = predicateSection.querySelector('[name="headers"]');
+            const bodyInput = predicateSection.querySelector('[name="body"]');
+            
+            methodSelect.value = predicate.method;
+            pathInput.value = predicate.path;
+            if (predicate.query) queryInput.value = JSON.stringify(predicate.query, null, 2);
+            if (predicate.headers) headersInput.value = JSON.stringify(predicate.headers, null, 2);
+            if (predicate.body) bodyInput.value = JSON.stringify(predicate.body, null, 2);
+        }
+        
+        // Add response
+        if (prefilledData.responses && prefilledData.responses.length > 0) {
+            const response = prefilledData.responses[0];
+            const responseSection = addResponseSection();
+            const statusInput = responseSection.querySelector('[name="statusCode"]');
+            const headersInput = responseSection.querySelector('[name="headers"]');
+            const bodyInput = responseSection.querySelector('[name="body"]');
+            
+            statusInput.value = response.statusCode;
+            if (response.headers) headersInput.value = JSON.stringify(response.headers, null, 2);
+            if (response.body) bodyInput.value = JSON.stringify(response.body, null, 2);
+        }
+    }
+    
+    modal.show();
+}

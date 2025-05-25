@@ -1,5 +1,6 @@
 import requests
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Union
+from requests.structures import CaseInsensitiveDict
 
 from services.constant_service import VALID_HTTP_METHODS
 
@@ -17,7 +18,8 @@ def call_api(
         variables: Dict[str, str] = {},
         headers: Optional[Dict[str, str]] = None,
         params: Optional[Dict[str, Any]] = None,
-        body: Optional[Dict[str, Any]] = None
+        body: Optional[Union[Dict[str, Any], str, bytes]] = None,
+        body_type: Optional[str] = None
 ) -> Dict[str, Any]:
     """Performs an HTTP request and returns a structured response."""
 
@@ -26,9 +28,49 @@ def call_api(
         return {"error": f"Unsupported HTTP method: {method}"}
 
     request_func = getattr(requests, method.lower())
-
     full_url = build_url(url, variables)
-    response = request_func(full_url, headers=headers, params=params, json=body)
+
+    # Convert headers to CaseInsensitiveDict for consistent handling
+    headers = CaseInsensitiveDict(headers) if headers else CaseInsensitiveDict()
+
+    # Prepare request kwargs
+    request_kwargs = {
+        'headers': headers,
+        'params': params
+    }
+
+    # Handle different body types
+    if body is not None and method in ['POST', 'PUT', 'PATCH']:
+        content_type = headers.get('Content-Type', '').lower()
+        
+        if body_type == 'form-data':
+            # Handle form-data
+            files = {}
+            data = {}
+            for key, value in body.items():
+                if isinstance(value, (str, bytes)):
+                    data[key] = value
+                else:
+                    files[key] = value
+            request_kwargs['files'] = files
+            request_kwargs['data'] = data
+        elif body_type == 'x-www-form-urlencoded':
+            # Handle x-www-form-urlencoded
+            request_kwargs['data'] = body
+        elif body_type == 'raw':
+            # Handle raw body
+            request_kwargs['data'] = body
+        elif body_type == 'binary':
+            # Handle binary data
+            request_kwargs['data'] = body
+        elif body_type == 'graphql':
+            # Handle GraphQL
+            request_kwargs['json'] = body
+        else:
+            # Default to JSON
+            request_kwargs['json'] = body
+
+    response = request_func(full_url, **request_kwargs)
 
     response_data = {
         "code": response.status_code,
@@ -37,7 +79,7 @@ def call_api(
 
     when_data = {}
     if headers:
-        when_data["header"] = headers
+        when_data["header"] = dict(headers)
     if params:
         when_data["query"] = params
     if body:

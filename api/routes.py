@@ -2,6 +2,7 @@ import json
 
 from dotenv import load_dotenv
 from flask import Blueprint, request, jsonify, render_template
+from dataclasses import asdict
 
 from services.api_call_service import call_api
 from services.constant_service import AUTO_CREATE_TESTS
@@ -11,6 +12,7 @@ from services.handler_service import handle_request
 from services.tests_generator_service import generate_tests, get_tests
 from services.tests_runner_service import TestRunnerService
 from services.utility_service import json_to_yaml
+from entity.imposter_model import Imposter, Predicate, ResponseEntry, Response
 
 api_bp = Blueprint('api', __name__)
 
@@ -75,16 +77,21 @@ def record():
     method = data.get('method')
     url = data.get('url')
     variables = data.get('variables', {})
-    headers = data.get('headers')
+    headers = data.get('headers', {})
     params = data.get('params')
     body = data.get('body')
+    body_type = data.get('body_type', 'json')  # Default to JSON if not specified
 
     if not method or not url:
         return jsonify({"error": "Both 'method' and 'url' are required."}), 400
 
-    result = json.dumps(call_api(method, url, variables, headers, params, body), indent=2)
-
-    return json_to_yaml(result), 200
+    # Make the API call and get the response
+    result = call_api(method, url, variables, headers, params, body, body_type)
+    
+    # Convert the result to YAML format
+    yaml_result = json_to_yaml(json.dumps(result, indent=2))
+    
+    return yaml_result, 200
 
 # General route to handle requests, using the service for matching
 @api_bp.route('/', defaults={'path': ''}, methods=["GET", "POST", "PUT", "DELETE"])

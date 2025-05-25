@@ -6,7 +6,7 @@
     "url": "http://127.0.0.1:5000/products?category=electronics",
     "headers": {},
     "body": {},
-    "delay": null,
+    "delay": 0.004,
     "expected_code": 200,
     "expected_text": "Electronics products list",
     "name": "test_1"
@@ -18,7 +18,7 @@
     "url": "http://127.0.0.1:5000/products?category=clothing",
     "headers": {},
     "body": {},
-    "delay": null,
+    "delay": 0.004,
     "expected_code": 200,
     "expected_text": "Clothing products list",
     "name": "test_2"
@@ -30,7 +30,7 @@
     "url": "http://127.0.0.1:5000/products",
     "headers": {},
     "body": {},
-    "delay": null,
+    "delay": 0.004,
     "expected_code": 400,
     "expected_text": "Invalid category",
     "name": "test_3"
@@ -46,7 +46,7 @@
     "body": {
       "status": "new"
     },
-    "delay": 0.045,
+    "delay": null,
     "expected_code": 201,
     "expected_text": "Order created successfully",
     "name": "test_4"
@@ -60,7 +60,7 @@
       "Content-Type": "application/xml"
     },
     "body": {},
-    "delay": 0.045,
+    "delay": null,
     "expected_code": 415,
     "expected_text": "Unsupported Media Type",
     "name": "test_5"
@@ -74,7 +74,7 @@
     "body": {
       "status": "pending"
     },
-    "delay": 0.045,
+    "delay": null,
     "expected_code": 200,
     "expected_text": "Order is in pending state",
     "name": "test_6"
@@ -86,7 +86,7 @@
     "url": "http://127.0.0.1:5000/orders",
     "headers": {},
     "body": {},
-    "delay": 0.045,
+    "delay": null,
     "expected_code": 400,
     "expected_text": "Bad request",
     "name": "test_7"
