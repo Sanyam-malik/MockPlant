@@ -23,6 +23,7 @@ def get_thread_count():
 
 def run_server():
     system = platform.system().lower()
+    system = "windows"
     
     if system == 'linux':
         # Use Gunicorn for Linux
