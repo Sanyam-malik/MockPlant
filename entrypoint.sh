@@ -4,4 +4,4 @@
 nohup python /app/mockplant_http.py &
 
 # Keep the container running
-tail -f /dev/null
+tail -f /app/logs/mockplant.log
