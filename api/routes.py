@@ -16,12 +16,13 @@ from entity.imposter_model import Imposter, Predicate, ResponseEntry, Response
 
 api_bp = Blueprint('api', __name__)
 
-# Load imposters from files when the app starts
-load_yaml_imposters()
-
 def _generate_tests():
     if AUTO_CREATE_TESTS:
         generate_tests()
+
+# Load imposters from files when the app starts
+load_yaml_imposters()
+_generate_tests()
 
 @api_bp.route("/")
 def index():
