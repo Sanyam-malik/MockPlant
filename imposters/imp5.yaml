@@ -5,11 +5,11 @@ predicates:
   - predicate:
       method: GET
       path: /users2/$id
-      delay: 1s
     responses:
       - response:
           code: 200
           content: Hello user with $id
+          content_type: text/plain
         when:
           path:
             id: 456
@@ -20,6 +20,7 @@ predicates:
       - response:
           code: 200
           content: Hello $user with $id
+          content_type: text/plain
         when:
           path:
             id: 456

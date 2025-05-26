@@ -249,7 +249,7 @@ function showPredicates(index) {
                 }
                 
                 details += `
-                    <div class="mt-3 p-3 border rounded response-item">
+                    <div class="mt-3 p-3 rounded response-item">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h6 class="mb-0">Response ${respIdx + 1}</h6>
                             <div class="btn-group">
@@ -259,6 +259,20 @@ function showPredicates(index) {
                                 <button class="btn btn-sm btn-danger delete-response" data-predicate="${idx}" data-response="${respIdx}">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label"><strong>Conditions:</strong></label>
+                            <div class="response-field" data-field="when" data-predicate="${idx}" data-response="${respIdx}">
+                                <pre class="response-text pre-transparent">${Object.keys(resp.when || {}).length > 0 ? JSON.stringify(resp.when, null, 2) : 'Not set'}</pre>
+                                <textarea onfocus="autoResize(this)" class="form-control response-input" style="display: none;">${Object.keys(resp.when || {}).length > 0 ? JSON.stringify(resp.when, null, 2) : ''}</textarea>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label"><strong>Headers:</strong></label>
+                            <div class="response-field" data-field="headers" data-predicate="${idx}" data-response="${respIdx}">
+                                <pre class="response-text pre-transparent">${Object.keys(resp.response.headers || {}).length > 0 ? JSON.stringify(resp.response.headers, null, 2) : 'Not set'}</pre>
+                                <textarea onfocus="autoResize(this)" class="form-control response-input" style="display: none;">${Object.keys(resp.response.headers || {}).length > 0 ? JSON.stringify(resp.response.headers, null, 2) : ''}</textarea>
                             </div>
                         </div>
                         <div class="mb-2">
@@ -343,10 +357,25 @@ function showPredicates(index) {
                             </div>
                         </div>
                         <div class="mb-2">
+                            <label class="form-label"><strong>Content Type:</strong></label>
+                            <div class="response-field" data-field="content_type" data-predicate="${idx}" data-response="${respIdx}">
+                                <div class="response-text">${resp.response.content_type || 'text/plain'}</div>
+                                <select class="form-select response-input" style="width: 25%; display: none;">
+                                    <option value="text/plain" ${!resp.response.content_type || resp.response.content_type === 'text/plain' ? 'selected' : ''}>text/plain</option>
+                                    <option value="application/json" ${resp.response.content_type === 'application/json' ? 'selected' : ''}>application/json</option>
+                                    <option value="application/xml" ${resp.response.content_type === 'application/xml' ? 'selected' : ''}>application/xml</option>
+                                    <option value="text/html" ${resp.response.content_type === 'text/html' ? 'selected' : ''}>text/html</option>
+                                    <option value="text/css" ${resp.response.content_type === 'text/css' ? 'selected' : ''}>text/css</option>
+                                    <option value="application/javascript" ${resp.response.content_type === 'application/javascript' ? 'selected' : ''}>application/javascript</option>
+                                    <option value="application/octet-stream" ${resp.response.content_type === 'application/octet-stream' ? 'selected' : ''}>application/octet-stream</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-2">
                             <label class="form-label"><strong>Content:</strong></label>
                             <div class="response-field" data-field="content" data-predicate="${idx}" data-response="${respIdx}">
-                                <div class="response-text">${resp.response.content || 'Not set'}</div>
-                                <textarea class="form-control response-input" style="display: none;" rows="3">${resp.response.content || ''}</textarea>
+                                <pre class="response-text pre-transparent">${resp.response.content || 'Not set'}</pre>
+                                <textarea onfocus="autoResize(this)" class="form-control response-input" style="display: none;" rows="3">${resp.response.content || ''}</textarea>
                             </div>
                         </div>
                     </div>
@@ -486,30 +515,56 @@ function setupPredicateEventListeners(imposter, imposterIndex) {
                 if (!isEditing) {
                     text.style.display = 'none';
                     input.style.display = 'block';
-                    input.focus();
+                    if (input.tagName === 'TEXTAREA') {
+                        input.focus();
+                    }
                     e.target.closest('.edit-response').classList.add('active');
                 } else {
                     text.style.display = 'block';
                     input.style.display = 'none';
-
-
-                    const fieldName = field.dataset.field;
-                    var value = input.value.trim();
                     
-                    // Update the response object
-                    if (!imposter.predicates[predicateIdx].responses[responseIdx].response) {
-                        imposter.predicates[predicateIdx].responses[responseIdx].response = {};
+                    // Update the value
+                    const fieldName = field.dataset.field;
+                    let value = null;
+                    
+                    if (fieldName === 'headers' || fieldName === 'when') {
+                        try {
+                            value = JSON.parse(input.value) || {};
+                        } catch (e) {
+                            value = {};
+                        }
+                    } else if (fieldName === 'code') {
+                        value = parseInt(input.value);
+                    } else {
+                        value = input.value;
                     }
-
-                    if(fieldName === "code") {
-                        value = parseInt(value);
+                    
+                    // Update the model
+                    if (fieldName === 'headers') {
+                        imposter.predicates[predicateIdx].responses[responseIdx].response.headers = value;
+                    } else if (fieldName === 'content_type') {
+                        imposter.predicates[predicateIdx].responses[responseIdx].response.content_type = value;
+                    } else if (fieldName === 'code') {
+                        imposter.predicates[predicateIdx].responses[responseIdx].response.code = value;
+                    } else if (fieldName === 'when') {
+                        imposter.predicates[predicateIdx].responses[responseIdx].when = value;
+                    } else {
+                        // Store content with type-specific sanitization
+                        const contentType = imposter.predicates[predicateIdx].responses[responseIdx].response.content_type || 'text/plain';
+                        imposter.predicates[predicateIdx].responses[responseIdx].response[fieldName] = value;
                     }
-                    imposter.predicates[predicateIdx].responses[responseIdx].response[fieldName] = value || null;
-                    text.textContent = value || 'Not set';
-
+                    
+                    // Update the display
+                    if (fieldName === 'headers' || fieldName === 'when') {
+                        text.textContent = Object.keys(value).length > 0 ? JSON.stringify(value, null, 2) : 'Not set';
+                    } else {
+                        text.textContent = value || 'Not set';
+                    }
+                    
                     e.target.closest('.edit-response').classList.remove('active');
                 }
             });
+
             // Save changes
             if(isEditing) {
                 updateImposter(imposterIndex, imposter);
@@ -560,17 +615,30 @@ function setupPredicateEventListeners(imposter, imposterIndex) {
 
     // Add new response
     document.querySelectorAll('.add-response').forEach(button => {
-        button.addEventListener('click', async (e) => {
+        button.addEventListener('click', (e) => {
             e.stopPropagation();
             const predicateIdx = parseInt(e.target.closest('.add-response').dataset.predicate);
+            
+            // Create new response object
             const newResponse = {
                 response: {
-                    code: 200,  // Set default code to 200
-                    content: "New response"
+                    code: 200,
+                    content: 'Default New Response',
+                    content_type: 'text/plain',
+                    headers: {}
                 }
             };
+            
+            // Add to model
+            if (!imposter.predicates[predicateIdx].responses) {
+                imposter.predicates[predicateIdx].responses = [];
+            }
             imposter.predicates[predicateIdx].responses.push(newResponse);
-            await updateImposter(imposterIndex, imposter);
+            
+            // Save changes
+            updateImposter(imposterIndex, imposter);
+            
+            // Refresh view
             showPredicates(imposterIndex);
         });
     });
@@ -663,7 +731,7 @@ async function createImposter(formData) {
 async function runTests() {
     switchMainContent("test");
     const testSection = document.getElementById('main-content-test');
-    testSection.innerHTML = '<h1 class="mt-3 px-2">Test Output</h1>';
+    testSection.innerHTML = '<h1 class="mt-3 px-2">Test Cases</h1>';
 
     try {
         const result = await fetchData('/_tests', {}, "Running Tests...");
@@ -717,15 +785,29 @@ async function runTests() {
             const testCase = cases.find(c => c.name === test.name);
             if (testCase) {
                 body.innerHTML = `
-                    <pre class="p-2 border rounded">
-Method: ${testCase.method}
-URL: ${testCase.url}
-Path: ${testCase.path}
-Headers: ${JSON.stringify(testCase.headers, null, 2)}
-Body: ${JSON.stringify(testCase.body, null, 2)}
-Expected Code: ${testCase.expected_code}
-Expected Text: ${testCase.expected_text}
-                    </pre>
+                    <div class="mb-4">
+                        <h5>Imposter</h5>
+                        <pre class="p-3 rounded">
+Type: ${testCase.imposter.type}
+Name: ${testCase.imposter.name}</pre>
+                    </div>
+                    <div class="mb-4">
+                        <h5>Request</h5>
+                        <pre class="p-3 rounded">
+Method: ${testCase.request.type}
+URL: ${testCase.request.url}
+Headers: ${JSON.stringify(testCase.request.headers, null, 2)}
+Body: ${JSON.stringify(testCase.request.body, null, 2)}</pre>
+                    </div>
+                    <div class="mb-4">
+                        <h5>Response</h5>
+                        <pre class="p-3 rounded">
+Delay: ${testCase.response.delay || 'None'}
+Headers: ${JSON.stringify(testCase.response.headers, null, 2)}
+Code: ${testCase.response.code}
+Content-Type: ${testCase.response['content-type']}
+Content: <pre class="p-3 rounded">${sanitizeContent(testCase.response.content, testCase.response['content-type'])}</pre></pre>
+                    </div>
                 `;
             }
             
@@ -859,7 +941,7 @@ function showAddPredicateModal(imposterIndex) {
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Content</label>
-                            <textarea class="form-control" name="responseContent" rows="3"></textarea>
+                            <textarea class="form-control" name="responseContent" onfocus="autoResize(this)" rows="3"></textarea>
                         </div>
                     </div>
                 </div>

@@ -11,19 +11,21 @@ class ImposterMetadata:
 
 @dataclass
 class Response:
-    """Represents a single response code and content"""
+    """Represents a response configuration."""
     code: int
     content: str
+    content_type: Optional[str] = "text/plain"
+    headers: Optional[Dict[str, str]] = field(default_factory=dict)
 
 @dataclass
 class ResponseEntry:
-    """Represents a single response along with optional matching conditions."""
+    """Represents a response entry with conditions."""
     response: Response
-    when: Optional[Dict[str, Any]] = field(default_factory=dict)
+    when: Dict[str, Any] = field(default_factory=dict)
 
 @dataclass
 class Predicate:
-    """Represents a request matching rule and associated responses."""
+    """Represents a predicate configuration."""
     method: str
     path: str
     delay: Optional[str] = None
@@ -32,6 +34,6 @@ class Predicate:
 
 @dataclass
 class Imposter:
-    """Represents an imposter configuration with metadata and predicates."""
+    """Represents a complete imposter configuration."""
     imposter: ImposterMetadata
     predicates: List[Predicate] = field(default_factory=list)

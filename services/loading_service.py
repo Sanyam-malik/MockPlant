@@ -1,3 +1,5 @@
+import base64
+import html
 import os
 from dataclasses import is_dataclass, asdict
 
@@ -8,8 +10,16 @@ from services.constant_service import IMPOSTERS_FOLDER
 
 # Import the dataclasses
 from entity.imposter_model import Imposter, ImposterMetadata, ResponseEntry, Predicate, Response
+from services.utility_service import sanitize_content, get_response_content_type, desanitize_content
 
 imposters: List[Imposter] = []
+
+class LiteralString(str): pass
+
+def literal_str_representer(dumper, data):
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
+
+yaml.add_representer(LiteralString, literal_str_representer)
 
 class YamlDumper(yaml.Dumper):
 
@@ -24,12 +34,25 @@ def parse_imposter_yaml(data: Dict[str, Any]) -> Imposter:
     predicates = []
     for pred_obj in data["predicates"]:
         pred_data = pred_obj.get("predicate", pred_obj)
-        responses = [
-            ResponseEntry(
-                response=Response(**resp.get('response')),
-                when=resp.get("when", {})
-            ) for resp in pred_obj.get("responses", [])
-        ]
+        responses = []
+
+        for resp_data in pred_obj.get('responses', []):
+            resp = resp_data.get('response', {})
+            content_type = get_response_content_type(resp.get('content_type', 'text/plain'))
+            content = sanitize_content(resp.get('content', ''), content_type)
+
+            response = Response(
+                code=int(resp.get('code', 200)),
+                content_type = content_type,
+                headers=resp.get('headers', {}),
+                content=content
+            )
+
+            response_entry = ResponseEntry(
+                response=response,
+                when=resp_data.get('when', {})
+            )
+            responses.append(response_entry)
 
         predicate = Predicate(
             method=pred_data["method"],
@@ -148,6 +171,17 @@ def to_custom_yaml(imposter_instance: Imposter) -> str:
     for pred in data['predicates']:
         pred_copy = pred.copy()
         responses = pred_copy.pop('responses', [])
+        for response in responses:
+            response_obj = response['response']
+            content_type = get_response_content_type(response_obj.get('content_type', 'text/plain'))
+            content = desanitize_content(response_obj.get('content', ''), content_type)
+            content = desanitize_content(content, content_type)
+
+            # Use content directly without desanitization
+            if isinstance(content, str) and '\n' in content:
+                response_obj['content'] = LiteralString(content)
+            else:
+                response_obj['content'] = content
         entry = {
             'predicate': clean_data(pred_copy),
             'responses': [clean_data(r) for r in responses]

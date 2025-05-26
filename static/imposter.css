@@ -2,7 +2,7 @@
     --bgColor: #000000bd;
     --textColor: white;
     --cardBg: #f0f0f0;
-    --cardHoverBg: #e0e0e0;
+    --cardHoverBg: #dddddda8;
     --borderColor: rgba(0, 0, 0, 0.08);
     --shadowColor: rgba(0, 0, 0, 0.08);
     --shadowHoverColor: rgba(0, 0, 0, 0.12);
@@ -39,7 +39,6 @@
 .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px var(--shadowHoverColor);
-    background-color: var(--cardHoverBg);
 }
 
 .list-group-item {
@@ -537,6 +536,20 @@ body {
     border-radius: 4px;
     margin: 0.5rem 0;
     box-shadow: none;
+}
+
+textarea {
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      resize: none; /* optional: prevent manual resizing */
+}
+
+.pre-transparent {
+    background: transparent !important;
+    background-color: transparent !important;
+    margin: 0px !important;
+    padding: 0px !important;
 }
 
 pre {

@@ -6,6 +6,7 @@ from services.constant_service import BASE_URL, TESTS_FILE
 from services.fallback_service import fallback_responses
 from services.loading_service import imposters
 from services.time_service import TimeConverterService
+from services.utility_service import get_content_type_headers, desanitize_content
 
 
 def substitute_path_variables(path, path_vars=None):
@@ -34,12 +35,10 @@ def collect_test_cases():
     test_cases = []
 
     for imposter in imposters:
-
         imposter_name = imposter.imposter.name
         imposter_type = imposter.imposter.type
 
         for predicate in imposter.predicates:
-
             if predicate.force_response is not None:
                 forced_test = create_tests_for_forced_responses(imposter_name, imposter_type, predicate, predicate.force_response)
                 test_cases.extend(forced_test)
@@ -74,29 +73,46 @@ def create_tests_for_forced_responses(imposter_name, imposter_type, predicate, f
             expected_text = expected_text.replace(f"${var}", val)
 
         test_case = {
-            "imposter": imposter_type,
-            "method": method,
-            "path": path,
-            "url": build_url(path, imposter_type, when.get("path"), when.get("query")),
-            "headers": when.get("header", {}),
-            "body": when.get("body", {}),
-            "delay": delay,
-            "expected_code": code,
-            "expected_text": expected_text
+            "imposter": {
+                "type": imposter_type,
+                "name": imposter_name
+            },
+            "request": {
+                "url": build_url(path, imposter_type, when.get("path"), when.get("query")),
+                "type": method,
+                "headers": when.get("header", {}),
+                "body": when.get("body", {})
+            },
+            "response": {
+                "delay": delay,
+                "headers": get_content_type_headers(response.content_type),
+                "code": code,
+                "content-type": response.content_type,
+                "content": desanitize_content(expected_text, response.content_type)
+            }
         }
         test_cases.append(test_case)
 
     if len(test_cases) == 0:
+        response = fallback_responses.get(force_response)
         test_case = {
-            "imposter": imposter_type,
-            "method": method,
-            "path": path,
-            "url": build_url(path, imposter_type),
-            "headers": {},
-            "body": {},
-            "delay": delay,
-            "expected_code": force_response,
-            "expected_text": fallback_responses.get(force_response)
+            "imposter": {
+                "type": imposter_type,
+                "name": imposter_name
+            },
+            "request": {
+                "url": build_url(path, imposter_type),
+                "type": method,
+                "headers": {},
+                "body": {}
+            },
+            "response": {
+                "delay": delay,
+                "headers": get_content_type_headers('json'),
+                "code": force_response,
+                "content-type": 'application/json',
+                "content": json.dumps(response, indent=2) if isinstance(response, dict) else response
+            }
         }
         test_cases.append(test_case)
     return test_cases
@@ -119,15 +135,23 @@ def create_tests_for_dynamic_responses(imposter_name, imposter_type, predicate):
             expected_text = expected_text.replace(f"${var}", val)
 
         test_case = {
-            "imposter": imposter_type,
-            "method": method,
-            "path": path,
-            "url": build_url(path, imposter_type, when.get("path"), when.get("query")),
-            "headers": when.get("header", {}),
-            "body": when.get("body", {}),
-            "delay": delay,
-            "expected_code": code,
-            "expected_text": expected_text
+            "imposter": {
+                "type": imposter_type,
+                "name": imposter_name
+            },
+            "request": {
+                "url": build_url(path, imposter_type, when.get("path"), when.get("query")),
+                "type": method,
+                "headers": when.get("header", {}),
+                "body": when.get("body", {})
+            },
+            "response": {
+                "delay": delay,
+                "headers": get_content_type_headers(response.content_type),
+                "code": code,
+                "content-type": response.content_type,
+                "content": desanitize_content(expected_text, response.content_type)
+            }
         }
         test_cases.append(test_case)
     return test_cases
