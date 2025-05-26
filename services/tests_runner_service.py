@@ -7,6 +7,7 @@ import requests
 from io import StringIO
 import base64
 import difflib
+import logging
 
 from services import utility_service
 from services.constant_service import TESTS_FILE, TEST_RESULTS_FILE
@@ -177,6 +178,9 @@ class TestRunnerService:
             result.test_results = sorted(result.test_results, key=lambda x: extract_number(x['name']))
             with open(self.results_path, "w") as f:
                 json.dump(result.test_results, f, indent=2, sort_keys=False)
+
+        # Log results
+        logging.info("✅ Test Results:\n%s", json.dumps(result.test_results, indent=2))
 
         return result.test_results
 

@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import logging
 
 from services.constant_service import BASE_URL, TESTS_FILE
 from services.fallback_service import fallback_responses
@@ -157,11 +158,17 @@ def create_tests_for_dynamic_responses(imposter_name, imposter_type, predicate):
     return test_cases
 
 def generate_tests():
+    logging.info("🔄 Starting test generation...")
     cases = collect_test_cases()
     output_file = os.path.join(TESTS_FILE)
     with open(output_file, "w") as f:
         json.dump(cases, f, indent=2)
-    print(f"✅ Generated {len(cases)} test cases to {output_file}")
+    
+    logging.info(f"✅ Generated {len(cases)} test cases to {output_file}")
+    logging.info(f"📊 Test cases breakdown:")
+    for imposter in imposters:
+        imposter_cases = [case for case in cases if case["imposter"]["name"] == imposter.imposter.name]
+        logging.info(f"  • {imposter.imposter.name}: {len(imposter_cases)} test cases")
     return cases
 
 def get_tests():

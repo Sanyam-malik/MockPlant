@@ -4,6 +4,7 @@ import time
 from string import Template
 from flask import Response
 from typing import Any
+import logging
 
 from services.fallback_service import fallback_responses
 from services.loading_service import imposters
@@ -13,7 +14,7 @@ from services.utility_service import get_response_content_type, desanitize_conte
 
 def match_conditions(source: dict, condition: dict) -> bool:
     if not isinstance(condition, dict):
-        print(f"Expected a dictionary but got {type(condition)}: {condition}")
+        logging.error(f"Expected a dictionary but got {type(condition)}: {condition}")
         return False
     """ Match a dictionary (`query`, `header`) against `when` conditions. """
     for key, expected in condition.items():
@@ -28,7 +29,7 @@ def match_conditions(source: dict, condition: dict) -> bool:
 def match_body_conditions(body: Any, condition: dict) -> bool:
     """Match body conditions with special handling for raw text bodies."""
     if not isinstance(condition, dict):
-        print(f"Expected a dictionary but got {type(condition)}: {condition}")
+        logging.error(f"Expected a dictionary but got {type(condition)}: {condition}")
         return False
 
     # If body is a dictionary (JSON), use regular matching
@@ -79,7 +80,6 @@ def get_forced_response(path_vars, forced_code, responses):
             response_content = Template(entry.response.content).safe_substitute(path_vars)
             headers = entry.response.headers or {}
             content_type = entry.response.content_type
-            response_content = desanitize_content(response_content, content_type)
             return Response(
                 response=desanitize_content(response_content, content_type),
                 status=code,
@@ -163,7 +163,6 @@ def get_dynamic_response(request_data, path_vars, responses):
             response_content = Template(entry.response.content).safe_substitute(path_vars)
             headers = entry.response.headers or {}
             content_type = get_response_content_type(entry.response.content_type)
-            response_content = desanitize_content(response_content, content_type)
             return Response(
                 response=desanitize_content(response_content, content_type),
                 status=int(entry.response.code),

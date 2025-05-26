@@ -77,6 +77,7 @@ def get_thread_count():
 
 def run_server():
     system = platform.system().lower()
+    system = 'windows'
     app.logger.info('Starting server on %s platform', system)
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -119,7 +120,7 @@ def run_server():
             connection_limit=1000
         )
     else:
-        print(f"Unsupported OS: {system}")
+        app.logger.error(f"Unsupported OS: {system}")
         sys.exit(1)
 
 if __name__ == '__main__':

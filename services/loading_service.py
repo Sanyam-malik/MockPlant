@@ -1,14 +1,13 @@
-import base64
-import html
 import os
 from dataclasses import is_dataclass, asdict
+import json
+import logging
 
 import yaml
 from typing import List, Dict, Any
 
 from services.constant_service import IMPOSTERS_FOLDER
 
-# Import the dataclasses
 from entity.imposter_model import Imposter, ImposterMetadata, ResponseEntry, Predicate, Response
 from services.utility_service import sanitize_content, get_response_content_type, desanitize_content
 
@@ -74,14 +73,14 @@ def save_imposter(data: Imposter):
         return False
     imposter = to_custom_yaml(data)
     file_path = os.path.join(IMPOSTERS_FOLDER, filename)
-    with open(file_path, "w", encoding='utf-8') as f:
-        try:
+    try:
+        with open(file_path, "w", encoding='utf-8') as f:
             f.write(imposter)
-            print(f"✅ Imposter file Updated: {filename}")
-            return True
-        except Exception as e:
-            print(f"❌ Error in updating imposter {filename}: {e}")
-            return False
+        logging.info(f"✅ Imposter file Updated: {filename}")
+        return True
+    except Exception as e:
+        logging.error(f"❌ Error in updating imposter {filename}: {e}")
+        return False
 
 def delete_imposter(data: Imposter):
     filename = data.imposter.file
@@ -111,19 +110,21 @@ def load_yaml_imposters(folder=IMPOSTERS_FOLDER):
                 raw["imposter"]["file"] = filename
                 imposter_obj = parse_imposter_yaml(raw)
                 imposters.append(imposter_obj)
-                print(f"✅ Loaded imposter: {imposter_obj.imposter.name}")
+                logging.info(f"✅ Loaded imposter: {imposter_obj.imposter.name}")
             except Exception as e:
-                print(f"❌ Error in {filename}: {e}")
+                logging.error(f"❌ Error in {filename}: {e}")
 
+def reload_imposters():
+    load_yaml_imposters(IMPOSTERS_FOLDER)
 
 def add_yaml_imposter(data: Dict[str, Any]):
     """Dynamically add a YAML imposter (already parsed) to the global list."""
     try:
         imposter_obj = parse_imposter_yaml(data)
         imposters.append(imposter_obj)
-        print(f"✅ Added imposter: {imposter_obj.imposter.name}")
+        logging.info(f"✅ Added imposter: {imposter_obj.imposter.name}")
     except Exception as e:
-        print(f"❌ Failed to add imposter: {e}")
+        logging.error(f"❌ Failed to add imposter: {e}")
 
 
 def list_yaml_imposters() -> List[Imposter]:
@@ -175,7 +176,6 @@ def to_custom_yaml(imposter_instance: Imposter) -> str:
             response_obj = response['response']
             content_type = get_response_content_type(response_obj.get('content_type', 'text/plain'))
             content = desanitize_content(response_obj.get('content', ''), content_type)
-            content = desanitize_content(content, content_type)
 
             # Use content directly without desanitization
             if isinstance(content, str) and '\n' in content:
