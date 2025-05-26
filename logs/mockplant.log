@@ -129,3 +129,5 @@
 2025-05-26 12:33:20,945 INFO: Response: POST http://127.0.0.1:5000/orders2 - 202 ACCEPTED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:62]
 2025-05-26 12:33:20,945 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 202 27 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
 2025-05-26 12:33:20,946 INFO: Response: GET http://localhost:5000/_tests - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:62]
+2025-05-26 13:30:16,840 INFO: Logging initialized in Gunicorn worker [in /home/sam/PycharmProjects/mockplant/gunicorn_conf.py:36]
+2025-05-26 13:30:18,849 INFO: Worker exiting (pid: 8896) [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/gunicorn/glogging.py:278]

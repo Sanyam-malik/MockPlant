@@ -79,6 +79,7 @@ def get_forced_response(path_vars, forced_code, responses):
             response_content = Template(entry.response.content).safe_substitute(path_vars)
             headers = entry.response.headers or {}
             content_type = entry.response.content_type
+            response_content = desanitize_content(response_content, content_type)
             return Response(
                 response=desanitize_content(response_content, content_type),
                 status=code,
@@ -162,6 +163,7 @@ def get_dynamic_response(request_data, path_vars, responses):
             response_content = Template(entry.response.content).safe_substitute(path_vars)
             headers = entry.response.headers or {}
             content_type = get_response_content_type(entry.response.content_type)
+            response_content = desanitize_content(response_content, content_type)
             return Response(
                 response=desanitize_content(response_content, content_type),
                 status=int(entry.response.code),
