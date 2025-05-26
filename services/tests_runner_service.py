@@ -40,7 +40,11 @@ class TestRunnerService:
         with open(self.suite_path, "r") as f:
             return json.load(f)
 
+
     def _create_test_function(self, test_case):
+
+        def _desanitize_content(self, content, content_type):
+            return utility_service.desanitize_content(content, content_type)
 
         def _make_request(self, url, method, headers, body):
             start_time = time.time()
@@ -85,8 +89,8 @@ class TestRunnerService:
             expected_headers = test_case["response"]["headers"]
             expected_delay = test_case["response"]["delay"]
             expected_code = test_case["response"]["code"]
-            expected_text = test_case["response"]["content"]
             expected_content_type = test_case["response"]["content-type"] if test_case["response"]["content-type"] else"text/plain"
+            expected_text = _desanitize_content(self, test_case["response"]["content"], expected_content_type)
 
             response, response_time = _make_request(self, url, method, headers, body)
             if response is None:

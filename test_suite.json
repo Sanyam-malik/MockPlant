@@ -306,7 +306,7 @@
       },
       "code": 200,
       "content-type": "text/html",
-      "content": "<!DOCTYPE html>\n<html>\n<head>\n  <title>Test Page</title>\n  <link rel=\"stylesheet\" href=\"/styles.css\">\n  <script src=\"/script.js\"></script>\n</head>\n<body>\n  <h1>Hello $name!</h1>\n  <p>This is a test page for content types.</p>\n</body>\n</html>\n"
+      "content": "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n  &lt;title&gt;Test Page&lt;/title&gt;\n  &lt;link rel=&quot;stylesheet&quot; href=&quot;/styles.css&quot;&gt;\n  &lt;script src=&quot;/script.js&quot;&gt;&lt;/script&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  &lt;h1&gt;Hello $name!&lt;/h1&gt;\n  &lt;p&gt;This is a test page for content types.&lt;/p&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n"
     },
     "name": "test_13"
   },
@@ -350,7 +350,7 @@
       },
       "code": 200,
       "content-type": "application/javascript",
-      "content": "console.log('Script loaded');\nfunction greet(name) {\n  console.log('Hello ' + name + '!');\n}\ngreet('$name');\n"
+      "content": "console.log(&#x27;Script loaded&#x27;);\nfunction greet(name) {\n  console.log(&#x27;Hello &#x27; + name + &#x27;!&#x27;);\n}\ngreet(&#x27;$name&#x27;);\n"
     },
     "name": "test_15"
   },
@@ -372,7 +372,7 @@
       },
       "code": 200,
       "content-type": "application/xml",
-      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root>\n  <user>\n    <id>$id</id>\n    <name>$name</name>\n    <email>$email</email>\n  </user>\n</root>\n"
+      "content": "&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;\n&lt;root&gt;\n  &lt;user&gt;\n    &lt;id&gt;$id&lt;/id&gt;\n    &lt;name&gt;$name&lt;/name&gt;\n    &lt;email&gt;$email&lt;/email&gt;\n  &lt;/user&gt;\n&lt;/root&gt;\n"
     },
     "name": "test_16"
   },
@@ -440,7 +440,7 @@
       },
       "code": 200,
       "content-type": "application/octet-stream",
-      "content": "Hello World"
+      "content": "SGVsbG8gV29ybGQ="
     },
     "name": "test_19"
   },
@@ -462,7 +462,7 @@
       },
       "code": 400,
       "content-type": "application/xml",
-      "content": "<error>\n  <code>400</code>\n  <message>Bad Request</message>\n  <details>Invalid parameter: $param</details>\n</error>\n"
+      "content": "&lt;error&gt;\n  &lt;code&gt;400&lt;/code&gt;\n  &lt;message&gt;Bad Request&lt;/message&gt;\n  &lt;details&gt;Invalid parameter: $param&lt;/details&gt;\n&lt;/error&gt;\n"
     },
     "name": "test_20"
   },

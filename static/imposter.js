@@ -806,7 +806,7 @@ Delay: ${testCase.response.delay || 'None'}
 Headers: ${JSON.stringify(testCase.response.headers, null, 2)}
 Code: ${testCase.response.code}
 Content-Type: ${testCase.response['content-type']}
-Content: <pre class="p-3 rounded">${sanitizeContent(testCase.response.content, testCase.response['content-type'])}</pre></pre>
+Content: <pre class="p-3 rounded">${testCase.response.content}</pre></pre>
                     </div>
                 `;
             }

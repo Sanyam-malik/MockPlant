@@ -88,7 +88,7 @@ def create_tests_for_forced_responses(imposter_name, imposter_type, predicate, f
                 "headers": get_content_type_headers(response.content_type),
                 "code": code,
                 "content-type": response.content_type,
-                "content": desanitize_content(expected_text, response.content_type)
+                "content": expected_text
             }
         }
         test_cases.append(test_case)
@@ -150,7 +150,7 @@ def create_tests_for_dynamic_responses(imposter_name, imposter_type, predicate):
                 "headers": get_content_type_headers(response.content_type),
                 "code": code,
                 "content-type": response.content_type,
-                "content": desanitize_content(expected_text, response.content_type)
+                "content": expected_text
             }
         }
         test_cases.append(test_case)
