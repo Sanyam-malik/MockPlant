@@ -3,7 +3,6 @@ import time
 from flask import Response
 
 from services.fallback_service import fallback_responses
-from services.loading_service import imposters
 from services.time_service import TimeConverterService
 from services.utility_service import get_response_content_type, desanitize_content, apply_template, match_conditions, \
     parse_request_body, match_body_conditions, match_path_conditions, match_path, match_header_conditions
@@ -71,7 +70,7 @@ def get_dynamic_response(request_data, path_vars, responses):
     )
 
 
-def handle_request(path, request_data, imposter_type="HTTP"):
+def handle_request(imposters, path, request_data, imposter_type="HTTP"):
     """ Handle incoming requests, match them with imposters, and return appropriate responses. """
     req_method = request_data.method
     req_path = f"/{path}"

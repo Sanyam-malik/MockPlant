@@ -18,7 +18,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Configure file upload settings
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+app.config['MAX_CONTENT_LENGTH'] = int(os.getenv("MAX_CONTENT_LENGTH", 16 * 1024 * 1024))
 
 # Optional local logging for development / Windows
 def setup_logging():
@@ -80,6 +80,7 @@ def get_thread_count():
 
 def run_server():
     system = platform.system().lower()
+    system = 'windows'
     app.logger.info('Starting server on %s platform', system)
 
     current_dir = os.path.dirname(os.path.abspath(__file__))

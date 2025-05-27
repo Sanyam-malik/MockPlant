@@ -3,26 +3,28 @@ from dataclasses import is_dataclass, asdict
 import logging
 
 import yaml
-from typing import List, Dict, Any
+from typing import Dict, Any
 
 from services.constant_service import IMPOSTERS_FOLDER
 
 from entity.imposter_model import Imposter, ImposterMetadata, ResponseEntry, Predicate, Response
 from services.utility_service import sanitize_content, get_response_content_type, desanitize_content
 
-imposters: List[Imposter] = []
-
 class LiteralString(str): pass
+
 
 def literal_str_representer(dumper, data):
     return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
 
+
 yaml.add_representer(LiteralString, literal_str_representer)
+
 
 class YamlDumper(yaml.Dumper):
 
     def increase_indent(self, flow=False, indentless=False):
         return super(YamlDumper, self).increase_indent(flow, False)
+
 
 def parse_imposter_yaml(data: Dict[str, Any]) -> Imposter:
     """Parse a YAML dictionary into an Imposter object."""
@@ -41,7 +43,7 @@ def parse_imposter_yaml(data: Dict[str, Any]) -> Imposter:
 
             response = Response(
                 code=int(resp.get('code', 200)),
-                content_type = content_type,
+                content_type=content_type,
                 headers=resp.get('headers', {}),
                 content=content
             )
@@ -81,6 +83,7 @@ def save_imposter(data: Imposter):
         logging.error(f"❌ Error in updating imposter {filename}: {e}")
         return False
 
+
 def delete_imposter(data: Imposter):
     filename = data.imposter.file
     file_path = os.path.join(IMPOSTERS_FOLDER, filename)
@@ -90,10 +93,10 @@ def delete_imposter(data: Imposter):
         os.remove(file_path)
         return True
 
+
 def load_yaml_imposters(folder=IMPOSTERS_FOLDER):
     """Load YAML imposters from disk into the global list."""
-    global imposters
-    imposters.clear()
+    imposters = []
 
     if not os.path.exists(folder):
         os.makedirs(folder)
@@ -113,25 +116,11 @@ def load_yaml_imposters(folder=IMPOSTERS_FOLDER):
             except Exception as e:
                 logging.error(f"❌ Error in {filename}: {e}")
 
-    imposters = sorted(imposters, key=lambda d: d.imposter.file)
+    return sorted(imposters, key=lambda d: d.imposter.file)
+
 
 def reload_imposters():
-    load_yaml_imposters(IMPOSTERS_FOLDER)
-
-def add_yaml_imposter(data: Dict[str, Any]):
-    """Dynamically add a YAML imposter (already parsed) to the global list."""
-    try:
-        imposter_obj = parse_imposter_yaml(data)
-        imposters.append(imposter_obj)
-        logging.info(f"✅ Added imposter: {imposter_obj.imposter.name}")
-    except Exception as e:
-        logging.error(f"❌ Failed to add imposter: {e}")
-
-
-def list_yaml_imposters() -> List[Imposter]:
-    """Return the current global list of imposters."""
-    return imposters
-
+    return load_yaml_imposters(IMPOSTERS_FOLDER)
 
 def clean_data(data, exclude_keys=None):
     """
