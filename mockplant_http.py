@@ -80,7 +80,6 @@ def get_thread_count():
 
 def run_server():
     system = platform.system().lower()
-    system = 'windows'
     app.logger.info('Starting server on %s platform', system)
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
