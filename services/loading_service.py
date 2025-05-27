@@ -1,6 +1,5 @@
 import os
 from dataclasses import is_dataclass, asdict
-import json
 import logging
 
 import yaml
@@ -113,6 +112,8 @@ def load_yaml_imposters(folder=IMPOSTERS_FOLDER):
                 logging.info(f"✅ Loaded imposter: {imposter_obj.imposter.name}")
             except Exception as e:
                 logging.error(f"❌ Error in {filename}: {e}")
+
+    imposters = sorted(imposters, key=lambda d: d.imposter.file)
 
 def reload_imposters():
     load_yaml_imposters(IMPOSTERS_FOLDER)
