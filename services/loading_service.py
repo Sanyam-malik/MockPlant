@@ -176,12 +176,10 @@ def to_custom_yaml(imposter_instance: Imposter) -> str:
             response_obj = response['response']
             content_type = get_response_content_type(response_obj.get('content_type', 'text/plain'))
             content = desanitize_content(response_obj.get('content', ''), content_type)
-
-            # Use content directly without desanitization
             if isinstance(content, str) and '\n' in content:
-                response_obj['content'] = LiteralString(content)
+                response_obj['content'] = LiteralString(desanitize_content(content, content_type))
             else:
-                response_obj['content'] = content
+                response_obj['content'] = desanitize_content(content, content_type)
         entry = {
             'predicate': clean_data(pred_copy),
             'responses': [clean_data(r) for r in responses]
