@@ -17,6 +17,9 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+# Configure file upload settings
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+
 # Optional local logging for development / Windows
 def setup_logging():
     log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs')
