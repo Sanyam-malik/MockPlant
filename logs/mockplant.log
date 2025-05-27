@@ -4171,3 +4171,777 @@
 2025-05-27 09:57:26,343 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
 2025-05-27 09:57:26,345 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
 2025-05-27 09:57:26,345 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:27:35,509 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:27:35,513 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:27:35,622 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:27:35,625 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:27:35,630 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:27:35,631 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:27:35,631 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:27:35,632 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:27:35,635 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:27:35,636 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:27:35,636 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:27:35,637 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:27:35,890 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:27:35,891 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:32,296 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:31:32,296 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:31:32,298 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:31:32,298 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:31:35,665 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:31:35,665 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:31:35,668 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:31:35,668 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:31:41,156 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:41,160 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:41,260 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:41,264 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:41,264 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:41,264 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:41,265 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:41,265 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:41,266 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:41,267 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:41,268 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:41,268 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:41,355 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:41,356 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:41,390 INFO: Request: GET http://localhost:5000/static//favicon/apple-touch-icon.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:41,391 INFO: Response: GET http://localhost:5000/static//favicon/apple-touch-icon.png - 404 NOT FOUND [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:41,392 INFO: Request: GET http://localhost:5000/static//favicon/favicon-16x16.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:41,392 INFO: Response: GET http://localhost:5000/static//favicon/favicon-16x16.png - 404 NOT FOUND [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:47,395 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:47,395 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:47,495 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:47,496 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:47,496 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:47,497 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:47,497 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:47,498 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:47,499 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:47,499 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:47,499 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:47,499 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:47,574 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:31:47,575 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:31:59,109 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:31:59,109 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:31:59,111 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:31:59,111 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:32:01,301 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:32:01,306 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:32:01,405 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:32:01,408 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:32:01,409 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:32:01,409 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:32:01,410 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:32:01,410 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:32:01,410 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:32:01,411 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:32:01,411 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:32:01,411 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:32:01,544 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:32:01,545 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:32:01,575 INFO: Request: GET http://localhost:5000/static/favicon/apple-touch-icon.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:32:01,575 INFO: Request: GET http://localhost:5000/static/favicon/favicon-16x16.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:32:01,576 INFO: Response: GET http://localhost:5000/static/favicon/favicon-16x16.png - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:32:01,576 INFO: Response: GET http://localhost:5000/static/favicon/apple-touch-icon.png - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:33:27,955 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:33:27,955 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:33:27,957 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:33:27,957 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:33:30,657 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:33:30,663 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:33:30,776 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:33:30,779 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:33:30,780 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:33:30,781 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:33:30,781 INFO: Response: GET http://localhost:5000/static/images/logo.png - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:33:30,785 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:33:30,785 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:33:30,786 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:33:30,786 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:33:30,786 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:33:30,787 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:33:30,787 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:33:30,908 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:33:30,909 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:37:08,393 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:37:08,393 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:37:08,519 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:37:08,519 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:37:08,524 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:37:08,525 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:37:08,526 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:37:08,526 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:37:08,526 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:37:08,527 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:37:08,527 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:37:08,528 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:37:08,737 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:37:08,737 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:37:08,738 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:37:08,739 INFO: Response: GET http://localhost:5000/static/images/logo.png - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:40:56,611 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:40:56,611 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:40:56,662 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:40:56,662 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:40:56,666 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:40:56,667 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:40:56,668 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:40:56,668 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:40:56,670 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:40:56,670 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:40:56,671 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:40:56,671 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:40:56,709 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:40:56,710 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:40:56,710 INFO: Response: GET http://localhost:5000/static/images/logo.png - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:40:56,711 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:17,455 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:17,456 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:17,520 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:17,521 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:17,525 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:17,525 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:17,526 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:17,526 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:17,526 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:17,527 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:17,528 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:17,532 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:17,579 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:17,580 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:17,580 INFO: Response: GET http://localhost:5000/static/images/logo.png - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:17,581 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:34,083 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:43:34,083 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:43:34,085 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:43:34,085 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:43:35,798 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:35,805 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:35,849 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:35,852 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:35,853 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:35,853 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:35,854 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:35,855 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:35,855 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:35,856 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:35,857 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:35,858 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:35,895 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:35,896 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:35,896 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:35,897 INFO: Response: GET http://localhost:5000/static/images/logo.png - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:57,483 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:43:57,483 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:43:57,486 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:43:57,486 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:43:59,238 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:59,243 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:59,293 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:59,296 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:59,297 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:59,298 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:59,298 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:59,298 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:59,299 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:59,299 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:59,300 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:59,300 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:59,340 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:59,341 INFO: Response: GET http://localhost:5000/static/images/logo.png - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:43:59,346 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:43:59,346 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:35,437 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:46:35,438 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:46:35,440 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:46:35,440 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:46:39,000 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:39,005 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:39,127 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:39,131 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:39,132 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:39,132 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:39,133 INFO: Response: GET http://localhost:5000/static/js/api.js - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:39,133 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:39,138 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:39,138 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:39,139 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:39,139 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:39,278 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:39,278 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:39,279 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:39,280 INFO: Response: GET http://localhost:5000/static/images/logo.png - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:48,666 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:46:48,666 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:46:48,668 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:46:48,668 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:46:50,350 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:50,356 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:50,415 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:50,418 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:50,419 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:50,420 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:50,420 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:50,420 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:50,421 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:50,422 INFO: Response: GET http://localhost:5000/static/js/api.js - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:50,422 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:50,423 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:50,464 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:50,464 INFO: Response: GET http://localhost:5000/static/images/logo.png - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:46:50,468 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:46:50,468 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:21,482 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:48:21,482 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:48:21,484 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:48:21,484 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:48:23,633 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:23,638 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:23,689 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:23,692 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:23,692 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:23,693 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:23,694 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:23,694 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:23,695 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:23,695 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:23,696 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:23,696 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:23,739 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:23,739 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:23,740 INFO: Response: GET http://localhost:5000/static/images/logo.png - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:23,740 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:39,499 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:48:39,499 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:48:39,502 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:48:39,502 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:48:42,059 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:42,064 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:42,116 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:42,120 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:42,121 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:42,122 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:42,122 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:42,123 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:42,124 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:42,124 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:42,125 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:42,126 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:42,166 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:42,167 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:48:42,167 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:48:42,168 INFO: Response: GET http://localhost:5000/static/images/logo.png - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:49:34,472 INFO: Logging initialized to mockplant.log [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:57]
+2025-05-27 11:49:34,472 INFO: Starting Waitress server [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:111]
+2025-05-27 11:49:34,474 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:49:34,474 INFO: Serving on http://0.0.0.0:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/waitress/wasyncore.py:485]
+2025-05-27 11:49:35,946 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:49:35,951 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:49:36,003 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:49:36,006 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:49:36,010 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:49:36,010 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:49:36,011 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:49:36,011 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:49:36,012 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:49:36,012 INFO: Response: GET http://localhost:5000/static/js/api.js - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:49:36,013 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:49:36,013 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:49:36,053 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:49:36,054 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:49:36,054 INFO: Response: GET http://localhost:5000/static/images/logo.png - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:49:36,055 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:43,790 INFO: Request: GET http://localhost:5000/ [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:43,791 INFO: Response: GET http://localhost:5000/ - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:43,844 INFO: Request: GET http://localhost:5000/static/imposter.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:43,844 INFO: Response: GET http://localhost:5000/static/imposter.css - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:43,845 INFO: Request: GET http://localhost:5000/static/js/common.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:43,847 INFO: Response: GET http://localhost:5000/static/js/common.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:43,848 INFO: Request: GET http://localhost:5000/static/js/api.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:43,849 INFO: Response: GET http://localhost:5000/static/js/api.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:43,851 INFO: Request: GET http://localhost:5000/static/js/utils.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:43,852 INFO: Response: GET http://localhost:5000/static/js/utils.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:43,853 INFO: Request: GET http://localhost:5000/static/imposter.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:43,853 INFO: Response: GET http://localhost:5000/static/imposter.js - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:43,903 INFO: Request: GET http://localhost:5000/static/images/logo.png [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:43,904 INFO: Response: GET http://localhost:5000/static/images/logo.png - 304 NOT MODIFIED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:43,906 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:43,907 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,778 INFO: Request: GET http://localhost:5000/_tests [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,780 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,781 INFO: Request: GET http://127.0.0.1:5000/users/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,781 INFO: Response: GET http://127.0.0.1:5000/users/123 - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,782 DEBUG: http://127.0.0.1:5000 "GET /users/123 HTTP/1.1" 400 72 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,783 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,784 INFO: Request: POST http://127.0.0.1:5000/orders [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,784 INFO: Response: POST http://127.0.0.1:5000/orders - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,785 DEBUG: http://127.0.0.1:5000 "POST /orders HTTP/1.1" 200 25 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,786 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,787 INFO: Request: POST http://127.0.0.1:5000/orders [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,787 INFO: Response: POST http://127.0.0.1:5000/orders - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,787 DEBUG: http://127.0.0.1:5000 "POST /orders HTTP/1.1" 400 11 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,789 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,790 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,790 INFO: Response: POST http://127.0.0.1:5000/orders2 - 201 CREATED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,790 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 201 43 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,791 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,792 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,792 INFO: Response: POST http://127.0.0.1:5000/orders2 - 202 ACCEPTED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,793 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 202 27 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,793 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,794 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,794 INFO: Response: POST http://127.0.0.1:5000/orders2 - 415 UNSUPPORTED MEDIA TYPE [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,795 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 415 43 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,796 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,796 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,796 INFO: Response: POST http://127.0.0.1:5000/orders2 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,797 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 200 29 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,798 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,799 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,799 INFO: Response: POST http://127.0.0.1:5000/orders2 - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,800 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 400 11 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,801 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,802 INFO: Request: GET http://127.0.0.1:5000/users2/456 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,802 INFO: Response: GET http://127.0.0.1:5000/users2/456 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,802 DEBUG: http://127.0.0.1:5000 "GET /users2/456 HTTP/1.1" 200 19 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,803 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,804 INFO: Request: GET http://127.0.0.1:5000/users2/456/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,804 INFO: Response: GET http://127.0.0.1:5000/users2/456/123 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,805 DEBUG: http://127.0.0.1:5000 "GET /users2/456/123 HTTP/1.1" 200 18 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,805 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,806 INFO: Request: GET http://127.0.0.1:5000/page?format=html [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,806 INFO: Response: GET http://127.0.0.1:5000/page?format=html - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,807 DEBUG: http://127.0.0.1:5000 "GET /page?format=html HTTP/1.1" 200 242 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,808 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,808 INFO: Request: PUT http://127.0.0.1:5000/users/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,809 INFO: Response: PUT http://127.0.0.1:5000/users/123 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,809 DEBUG: http://127.0.0.1:5000 "PUT /users/123 HTTP/1.1" 200 14 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,810 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,811 INFO: Request: GET http://127.0.0.1:5000/styles.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,811 INFO: Response: GET http://127.0.0.1:5000/styles.css - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,811 DEBUG: http://127.0.0.1:5000 "GET /styles.css HTTP/1.1" 200 143 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,812 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,813 INFO: Request: GET http://127.0.0.1:5000/script.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,813 INFO: Response: GET http://127.0.0.1:5000/script.js - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,813 DEBUG: http://127.0.0.1:5000 "GET /script.js HTTP/1.1" 200 109 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,814 DEBUG: Encoding detection: ascii is most likely the one. [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/charset_normalizer/api.py:461]
+2025-05-27 11:50:44,815 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,816 INFO: Request: GET http://127.0.0.1:5000/data?format=xml [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,816 INFO: Response: GET http://127.0.0.1:5000/data?format=xml - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,816 DEBUG: http://127.0.0.1:5000 "GET /data?format=xml HTTP/1.1" 200 139 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,819 DEBUG: Encoding detection: utf_8 is most likely the one. [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/charset_normalizer/api.py:461]
+2025-05-27 11:50:44,819 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,820 INFO: Request: POST http://127.0.0.1:5000/upload [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,820 INFO: Response: POST http://127.0.0.1:5000/upload - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,821 DEBUG: http://127.0.0.1:5000 "POST /upload HTTP/1.1" 200 76 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,821 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,822 INFO: Request: GET http://127.0.0.1:5000/text [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,822 INFO: Response: GET http://127.0.0.1:5000/text - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,823 DEBUG: http://127.0.0.1:5000 "GET /text HTTP/1.1" 200 82 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,823 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,824 INFO: Request: GET http://127.0.0.1:5000/binary [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,824 INFO: Response: GET http://127.0.0.1:5000/binary - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,825 DEBUG: http://127.0.0.1:5000 "GET /binary HTTP/1.1" 200 11 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,826 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,826 INFO: Request: GET http://127.0.0.1:5000/error?format=xml [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,827 INFO: Response: GET http://127.0.0.1:5000/error?format=xml - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,827 DEBUG: http://127.0.0.1:5000 "GET /error?format=xml HTTP/1.1" 400 116 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,827 DEBUG: Encoding detection: ascii is most likely the one. [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/charset_normalizer/api.py:461]
+2025-05-27 11:50:44,828 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,829 INFO: Request: GET http://127.0.0.1:5000/error?format=json [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,829 INFO: Response: GET http://127.0.0.1:5000/error?format=json - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,830 DEBUG: http://127.0.0.1:5000 "GET /error?format=json HTTP/1.1" 400 111 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,830 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,831 INFO: Request: DELETE http://127.0.0.1:5000/users/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,831 INFO: Response: DELETE http://127.0.0.1:5000/users/123 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,832 DEBUG: http://127.0.0.1:5000 "DELETE /users/123 HTTP/1.1" 200 14 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,832 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,833 INFO: Request: POST http://127.0.0.1:5000/users/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,833 INFO: Response: POST http://127.0.0.1:5000/users/123 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,834 DEBUG: http://127.0.0.1:5000 "POST /users/123 HTTP/1.1" 200 11 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,834 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,835 INFO: Request: GET http://127.0.0.1:5000/products?category=electronics [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,835 INFO: Response: GET http://127.0.0.1:5000/products?category=electronics - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,836 DEBUG: http://127.0.0.1:5000 "GET /products?category=electronics HTTP/1.1" 200 25 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,837 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,838 INFO: Request: GET http://127.0.0.1:5000/products?category=clothing [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,839 INFO: Response: GET http://127.0.0.1:5000/products?category=clothing - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,839 DEBUG: http://127.0.0.1:5000 "GET /products?category=clothing HTTP/1.1" 200 22 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,840 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,841 INFO: Request: GET http://127.0.0.1:5000/products [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,841 INFO: Response: GET http://127.0.0.1:5000/products - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,841 DEBUG: http://127.0.0.1:5000 "GET /products HTTP/1.1" 400 16 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,842 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,843 INFO: Request: POST http://127.0.0.1:5000/orders [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,843 INFO: Response: POST http://127.0.0.1:5000/orders - 201 CREATED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,843 DEBUG: http://127.0.0.1:5000 "POST /orders HTTP/1.1" 201 26 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,844 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:50:44,845 INFO: Request: POST http://127.0.0.1:5000/orders [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:50:44,845 INFO: Response: POST http://127.0.0.1:5000/orders - 415 UNSUPPORTED MEDIA TYPE [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:50:44,845 DEBUG: http://127.0.0.1:5000 "POST /orders HTTP/1.1" 415 22 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:50:44,846 INFO: ✅ Test Results:
+[
+  {
+    "name": "test_1",
+    "status": "Pass"
+  },
+  {
+    "name": "test_2",
+    "status": "Pass"
+  },
+  {
+    "name": "test_3",
+    "status": "Pass"
+  },
+  {
+    "name": "test_4",
+    "status": "Pass"
+  },
+  {
+    "name": "test_5",
+    "status": "Pass"
+  },
+  {
+    "name": "test_6",
+    "status": "Pass"
+  },
+  {
+    "name": "test_7",
+    "status": "Pass"
+  },
+  {
+    "name": "test_8",
+    "status": "Pass"
+  },
+  {
+    "name": "test_9",
+    "status": "Pass"
+  },
+  {
+    "name": "test_10",
+    "status": "Pass"
+  },
+  {
+    "name": "test_11",
+    "status": "Pass"
+  },
+  {
+    "name": "test_12",
+    "status": "Pass"
+  },
+  {
+    "name": "test_13",
+    "status": "Pass"
+  },
+  {
+    "name": "test_14",
+    "status": "Pass"
+  },
+  {
+    "name": "test_15",
+    "status": "Pass"
+  },
+  {
+    "name": "test_16",
+    "status": "Pass"
+  },
+  {
+    "name": "test_17",
+    "status": "Pass"
+  },
+  {
+    "name": "test_18",
+    "status": "Pass"
+  },
+  {
+    "name": "test_19",
+    "status": "Pass"
+  },
+  {
+    "name": "test_20",
+    "status": "Pass"
+  },
+  {
+    "name": "test_21",
+    "status": "Pass"
+  },
+  {
+    "name": "test_22",
+    "status": "Pass"
+  },
+  {
+    "name": "test_23",
+    "status": "Pass"
+  },
+  {
+    "name": "test_24",
+    "status": "Pass"
+  },
+  {
+    "name": "test_25",
+    "status": "Pass"
+  },
+  {
+    "name": "test_26",
+    "status": "Pass"
+  },
+  {
+    "name": "test_27",
+    "status": "Pass"
+  }
+] [in /home/sam/PycharmProjects/mockplant/services/tests_runner_service.py:183]
+2025-05-27 11:50:44,847 INFO: Response: GET http://localhost:5000/_tests - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:22,159 INFO: Request: PUT http://localhost:5000/_imposters/2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:22,161 INFO: ✅ Imposter file Updated: imp3.yaml [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:80]
+2025-05-27 11:51:22,163 INFO: ✅ Loaded imposter: Products [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,165 INFO: ✅ Loaded imposter: Orders [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,167 INFO: ✅ Loaded imposter: Orders2 [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,174 INFO: ✅ Loaded imposter: ContentTypeTest [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,176 INFO: ✅ Loaded imposter: Users [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,178 INFO: ✅ Loaded imposter: Users2 [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,180 INFO: ✅ Loaded imposter: Products [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,182 INFO: ✅ Loaded imposter: Orders [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,184 INFO: ✅ Loaded imposter: Orders2 [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,191 INFO: ✅ Loaded imposter: ContentTypeTest [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,193 INFO: ✅ Loaded imposter: Users [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,194 INFO: ✅ Loaded imposter: Users2 [in /home/sam/PycharmProjects/mockplant/services/loading_service.py:115]
+2025-05-27 11:51:22,195 INFO: 🔄 Starting test generation... [in /home/sam/PycharmProjects/mockplant/services/tests_generator_service.py:160]
+2025-05-27 11:51:22,196 INFO: ✅ Generated 27 test cases to ./test_suite.json [in /home/sam/PycharmProjects/mockplant/services/tests_generator_service.py:166]
+2025-05-27 11:51:22,196 INFO: 📊 Test cases breakdown: [in /home/sam/PycharmProjects/mockplant/services/tests_generator_service.py:167]
+2025-05-27 11:51:22,196 INFO:   • Users: 4 test cases [in /home/sam/PycharmProjects/mockplant/services/tests_generator_service.py:170]
+2025-05-27 11:51:22,196 INFO:   • Products: 3 test cases [in /home/sam/PycharmProjects/mockplant/services/tests_generator_service.py:170]
+2025-05-27 11:51:22,196 INFO:   • Orders: 4 test cases [in /home/sam/PycharmProjects/mockplant/services/tests_generator_service.py:170]
+2025-05-27 11:51:22,196 INFO:   • Orders2: 5 test cases [in /home/sam/PycharmProjects/mockplant/services/tests_generator_service.py:170]
+2025-05-27 11:51:22,196 INFO:   • Users2: 2 test cases [in /home/sam/PycharmProjects/mockplant/services/tests_generator_service.py:170]
+2025-05-27 11:51:22,196 INFO:   • ContentTypeTest: 9 test cases [in /home/sam/PycharmProjects/mockplant/services/tests_generator_service.py:170]
+2025-05-27 11:51:22,196 INFO: Response: PUT http://localhost:5000/_imposters/2 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:22,209 INFO: Request: GET http://localhost:5000/_imposters [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:22,210 INFO: Response: GET http://localhost:5000/_imposters - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,263 INFO: Request: GET http://localhost:5000/_tests [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,264 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,265 INFO: Request: GET http://127.0.0.1:5000/users/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,265 INFO: Response: GET http://127.0.0.1:5000/users/123 - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,265 DEBUG: http://127.0.0.1:5000 "GET /users/123 HTTP/1.1" 400 72 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,266 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,266 INFO: Request: POST http://127.0.0.1:5000/orders [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,267 INFO: Response: POST http://127.0.0.1:5000/orders - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,267 DEBUG: http://127.0.0.1:5000 "POST /orders HTTP/1.1" 200 25 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,268 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,269 INFO: Request: POST http://127.0.0.1:5000/orders [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,269 INFO: Response: POST http://127.0.0.1:5000/orders - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,269 DEBUG: http://127.0.0.1:5000 "POST /orders HTTP/1.1" 400 11 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,270 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,271 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,271 INFO: Response: POST http://127.0.0.1:5000/orders2 - 201 CREATED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,271 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 201 43 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,272 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,273 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,273 INFO: Response: POST http://127.0.0.1:5000/orders2 - 202 ACCEPTED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,273 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 202 27 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,274 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,275 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,275 INFO: Response: POST http://127.0.0.1:5000/orders2 - 415 UNSUPPORTED MEDIA TYPE [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,275 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 415 43 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,276 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,276 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,277 INFO: Response: POST http://127.0.0.1:5000/orders2 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,277 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 200 29 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,278 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,279 INFO: Request: POST http://127.0.0.1:5000/orders2 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,279 INFO: Response: POST http://127.0.0.1:5000/orders2 - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,279 DEBUG: http://127.0.0.1:5000 "POST /orders2 HTTP/1.1" 400 11 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,280 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,281 INFO: Request: GET http://127.0.0.1:5000/users2/456 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,281 INFO: Response: GET http://127.0.0.1:5000/users2/456 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,282 DEBUG: http://127.0.0.1:5000 "GET /users2/456 HTTP/1.1" 200 19 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,283 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,283 INFO: Request: GET http://127.0.0.1:5000/users2/456/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,283 INFO: Response: GET http://127.0.0.1:5000/users2/456/123 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,284 DEBUG: http://127.0.0.1:5000 "GET /users2/456/123 HTTP/1.1" 200 18 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,285 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,285 INFO: Request: GET http://127.0.0.1:5000/page?format=html [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,285 INFO: Response: GET http://127.0.0.1:5000/page?format=html - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,286 DEBUG: http://127.0.0.1:5000 "GET /page?format=html HTTP/1.1" 200 242 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,287 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,288 INFO: Request: PUT http://127.0.0.1:5000/users/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,288 INFO: Response: PUT http://127.0.0.1:5000/users/123 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,288 DEBUG: http://127.0.0.1:5000 "PUT /users/123 HTTP/1.1" 200 14 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,289 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,290 INFO: Request: GET http://127.0.0.1:5000/styles.css [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,290 INFO: Response: GET http://127.0.0.1:5000/styles.css - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,290 DEBUG: http://127.0.0.1:5000 "GET /styles.css HTTP/1.1" 200 143 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,291 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,292 INFO: Request: GET http://127.0.0.1:5000/script.js [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,293 INFO: Response: GET http://127.0.0.1:5000/script.js - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,293 DEBUG: http://127.0.0.1:5000 "GET /script.js HTTP/1.1" 200 109 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,294 DEBUG: Encoding detection: ascii is most likely the one. [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/charset_normalizer/api.py:461]
+2025-05-27 11:51:24,294 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,295 INFO: Request: GET http://127.0.0.1:5000/data?format=xml [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,295 INFO: Response: GET http://127.0.0.1:5000/data?format=xml - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,296 DEBUG: http://127.0.0.1:5000 "GET /data?format=xml HTTP/1.1" 200 139 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,296 DEBUG: Encoding detection: utf_8 is most likely the one. [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/charset_normalizer/api.py:461]
+2025-05-27 11:51:24,297 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,298 INFO: Request: POST http://127.0.0.1:5000/upload [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,298 INFO: Response: POST http://127.0.0.1:5000/upload - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,298 DEBUG: http://127.0.0.1:5000 "POST /upload HTTP/1.1" 200 76 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,299 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,300 INFO: Request: GET http://127.0.0.1:5000/text [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,300 INFO: Response: GET http://127.0.0.1:5000/text - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,300 DEBUG: http://127.0.0.1:5000 "GET /text HTTP/1.1" 200 82 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,301 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,302 INFO: Request: GET http://127.0.0.1:5000/binary [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,302 INFO: Response: GET http://127.0.0.1:5000/binary - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,303 DEBUG: http://127.0.0.1:5000 "GET /binary HTTP/1.1" 200 11 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,304 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,305 INFO: Request: GET http://127.0.0.1:5000/error?format=xml [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,305 INFO: Response: GET http://127.0.0.1:5000/error?format=xml - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,305 DEBUG: http://127.0.0.1:5000 "GET /error?format=xml HTTP/1.1" 400 116 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,306 DEBUG: Encoding detection: ascii is most likely the one. [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/charset_normalizer/api.py:461]
+2025-05-27 11:51:24,306 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,307 INFO: Request: GET http://127.0.0.1:5000/error?format=json [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,307 INFO: Response: GET http://127.0.0.1:5000/error?format=json - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,308 DEBUG: http://127.0.0.1:5000 "GET /error?format=json HTTP/1.1" 400 111 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,308 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,309 INFO: Request: DELETE http://127.0.0.1:5000/users/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,309 INFO: Response: DELETE http://127.0.0.1:5000/users/123 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,309 DEBUG: http://127.0.0.1:5000 "DELETE /users/123 HTTP/1.1" 200 14 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,310 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,311 INFO: Request: POST http://127.0.0.1:5000/users/123 [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,311 INFO: Response: POST http://127.0.0.1:5000/users/123 - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,311 DEBUG: http://127.0.0.1:5000 "POST /users/123 HTTP/1.1" 200 11 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,312 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,313 INFO: Request: GET http://127.0.0.1:5000/products?category=electronics [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,313 INFO: Response: GET http://127.0.0.1:5000/products?category=electronics - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,313 DEBUG: http://127.0.0.1:5000 "GET /products?category=electronics HTTP/1.1" 200 25 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,314 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,315 INFO: Request: GET http://127.0.0.1:5000/products?category=clothing [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,315 INFO: Response: GET http://127.0.0.1:5000/products?category=clothing - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,316 DEBUG: http://127.0.0.1:5000 "GET /products?category=clothing HTTP/1.1" 200 22 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,316 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,317 INFO: Request: GET http://127.0.0.1:5000/products [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,317 INFO: Response: GET http://127.0.0.1:5000/products - 400 BAD REQUEST [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,317 DEBUG: http://127.0.0.1:5000 "GET /products HTTP/1.1" 400 16 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,319 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,319 INFO: Request: POST http://127.0.0.1:5000/orders [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,320 INFO: Response: POST http://127.0.0.1:5000/orders - 201 CREATED [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,320 DEBUG: http://127.0.0.1:5000 "POST /orders HTTP/1.1" 201 26 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,321 DEBUG: Starting new HTTP connection (1): 127.0.0.1:5000 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:241]
+2025-05-27 11:51:24,322 INFO: Request: POST http://127.0.0.1:5000/orders [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:61]
+2025-05-27 11:51:24,322 INFO: Response: POST http://127.0.0.1:5000/orders - 415 UNSUPPORTED MEDIA TYPE [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]
+2025-05-27 11:51:24,322 DEBUG: http://127.0.0.1:5000 "POST /orders HTTP/1.1" 415 22 [in /home/sam/PycharmProjects/mockplant/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py:544]
+2025-05-27 11:51:24,323 INFO: ✅ Test Results:
+[
+  {
+    "name": "test_1",
+    "status": "Pass"
+  },
+  {
+    "name": "test_2",
+    "status": "Pass"
+  },
+  {
+    "name": "test_3",
+    "status": "Pass"
+  },
+  {
+    "name": "test_4",
+    "status": "Pass"
+  },
+  {
+    "name": "test_5",
+    "status": "Pass"
+  },
+  {
+    "name": "test_6",
+    "status": "Pass"
+  },
+  {
+    "name": "test_7",
+    "status": "Pass"
+  },
+  {
+    "name": "test_8",
+    "status": "Pass"
+  },
+  {
+    "name": "test_9",
+    "status": "Pass"
+  },
+  {
+    "name": "test_10",
+    "status": "Pass"
+  },
+  {
+    "name": "test_11",
+    "status": "Pass"
+  },
+  {
+    "name": "test_12",
+    "status": "Pass"
+  },
+  {
+    "name": "test_13",
+    "status": "Pass"
+  },
+  {
+    "name": "test_14",
+    "status": "Pass"
+  },
+  {
+    "name": "test_15",
+    "status": "Pass"
+  },
+  {
+    "name": "test_16",
+    "status": "Pass"
+  },
+  {
+    "name": "test_17",
+    "status": "Pass"
+  },
+  {
+    "name": "test_18",
+    "status": "Pass"
+  },
+  {
+    "name": "test_19",
+    "status": "Pass"
+  },
+  {
+    "name": "test_20",
+    "status": "Pass"
+  },
+  {
+    "name": "test_21",
+    "status": "Pass"
+  },
+  {
+    "name": "test_22",
+    "status": "Pass"
+  },
+  {
+    "name": "test_23",
+    "status": "Pass"
+  },
+  {
+    "name": "test_24",
+    "status": "Pass"
+  },
+  {
+    "name": "test_25",
+    "status": "Pass"
+  },
+  {
+    "name": "test_26",
+    "status": "Pass"
+  },
+  {
+    "name": "test_27",
+    "status": "Pass"
+  }
+] [in /home/sam/PycharmProjects/mockplant/services/tests_runner_service.py:183]
+2025-05-27 11:51:24,324 INFO: Response: GET http://localhost:5000/_tests - 200 OK [in /home/sam/PycharmProjects/mockplant/mockplant_http.py:65]

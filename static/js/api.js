@@ -482,8 +482,8 @@ function showApiCallSection() {
 document.addEventListener('DOMContentLoaded', () => {
     const welcomeSection = document.getElementById('welcome-section');
     const apiCallButton = document.createElement('button');
-    apiCallButton.className = 'btn btn-purple mt-4';
-    apiCallButton.innerHTML = '<i class="fa-solid fa-code"></i> Make API Call';
+    apiCallButton.className = 'btn btn-purple mt-2';
+    apiCallButton.innerHTML = '<i class="fa-solid fa-code"></i> Record API Response';
     apiCallButton.onclick = showApiCallSection;
     welcomeSection.appendChild(apiCallButton);
 });

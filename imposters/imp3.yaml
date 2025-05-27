@@ -9,6 +9,7 @@ predicates:
       - response:
           code: 201
           content: Order created successfully
+          content_type: text/plain
         when:
           body:
             status: new
@@ -17,15 +18,18 @@ predicates:
       - response:
           code: 415
           content: Unsupported Media Type
+          content_type: text/plain
         when:
           header:
             Content-Type: application/xml
       - response:
           code: 200
           content: Order is in pending state
+          content_type: text/plain
         when:
           body:
             status: pending
       - response:
           code: 400
           content: Bad request
+          content_type: text/plain
