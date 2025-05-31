@@ -92,16 +92,21 @@ jobs:
           docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest \
                        -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ needs.version-bump.outputs.new_tag }} .
 
-      - name: Trivy Scan (Security)
+      - name: Trivy Scan (Fail on High/Critical)
         run: |
           if ! command -v trivy >/dev/null; then
             echo "Installing Trivy..."
             curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
           fi
 
-          trivy image --no-progress --exit-code 1 \
-            ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ needs.version-bump.outputs.new_tag }} || \
-            echo "Trivy scan found vulnerabilities. Review above results."
+          echo "Scanning for HIGH and CRITICAL vulnerabilities..."
+
+          trivy image \
+            --severity HIGH,CRITICAL \
+            --exit-code 1 \
+            --no-progress \
+            ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ needs.version-bump.outputs.new_tag }}
+
 
       - name: Push Docker Images
         run: |
