@@ -25,6 +25,8 @@ const fetchData = async (url, options = {}, txt) => {
 // API Call functionality
 function addHeader() {
     const headersDiv = document.getElementById('api-headers');
+    if (!headersDiv) return;
+    
     const headerRow = document.createElement('div');
     headerRow.className = 'row mb-2';
     headerRow.innerHTML = `
@@ -49,6 +51,8 @@ function removeHeader(button) {
 
 function addParam() {
     const paramsDiv = document.getElementById('api-params');
+    if (!paramsDiv) return;
+    
     const paramRow = document.createElement('div');
     paramRow.className = 'row mb-2';
     paramRow.innerHTML = `
@@ -107,12 +111,18 @@ function buildUrl(baseUrl, params) {
 
 function updateBodyInput() {
     const bodyType = document.getElementById('body-type').value;
+    
+    // Hide all body inputs first
     document.querySelectorAll('.body-input').forEach(input => {
         input.style.display = 'none';
     });
     
+    // Show the selected body type input
     if (bodyType !== 'none') {
-        document.getElementById(`${bodyType}-body`).style.display = 'block';
+        const selectedBody = document.getElementById(`${bodyType}-body`);
+        if (selectedBody) {
+            selectedBody.style.display = 'block';
+        }
     }
 }
 
@@ -262,24 +272,6 @@ async function makeApiCall() {
                     // Don't set Content-Type header for binary, browser will set it automatically
                 }
                 break;
-
-            case 'graphql':
-                const query = document.getElementById('api-body-graphql-query').value;
-                const variables = document.getElementById('api-body-graphql-variables').value;
-                if (query) {
-                    try {
-                        const graphqlBody = {
-                            query,
-                            variables: variables ? JSON.parse(variables) : undefined
-                        };
-                        options.body = JSON.stringify(graphqlBody);
-                        options.headers['Content-Type'] = 'application/json';
-                    } catch (e) {
-                        showError('Invalid GraphQL variables JSON');
-                        return;
-                    }
-                }
-                break;
         }
     }
 
@@ -348,12 +340,6 @@ function createImposterFromResponse() {
         case 'raw':
             body = document.getElementById('api-body-raw').value;
             break;
-        case 'graphql':
-            body = {
-                query: document.getElementById('api-body-graphql-query').value,
-                variables: document.getElementById('api-body-graphql-variables').value
-            };
-            break;
         default:
             body = null;
     }
@@ -382,97 +368,86 @@ function createImposterFromResponse() {
 // Reset all API call fields to their default state
 function resetApiCallFields() {
     // Reset method and URL
-    document.getElementById('api-method').value = 'GET';
-    document.getElementById('api-url').value = '';
+    const methodSelect = document.getElementById('api-method');
+    const urlInput = document.getElementById('api-url');
+    if (methodSelect) methodSelect.value = 'GET';
+    if (urlInput) urlInput.value = '';
 
     // Reset headers
     const headersDiv = document.getElementById('api-headers');
-    headersDiv.innerHTML = `
-        <div class="row mb-2">
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Key" name="header-key">
+    if (headersDiv) {
+        headersDiv.innerHTML = `
+            <div class="row mb-2">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Key" name="header-key">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Value" name="header-value">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger" onclick="removeHeader(this)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
             </div>
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Value" name="header-value">
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-danger" onclick="removeHeader(this)">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-        </div>
-    `;
+        `;
+    }
 
     // Reset parameters
     const paramsDiv = document.getElementById('api-params');
-    paramsDiv.innerHTML = `
-        <div class="row mb-2">
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Key" name="param-key">
+    if (paramsDiv) {
+        paramsDiv.innerHTML = `
+            <div class="row mb-2">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Key" name="param-key">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Value" name="param-value">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger" onclick="removeParam(this)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
             </div>
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Value" name="param-value">
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-danger" onclick="removeParam(this)">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-        </div>
-    `;
+        `;
+    }
 
     // Reset body type and all body inputs
-    document.getElementById('body-type').value = 'none';
-    document.getElementById('api-body-json').value = '';
-    document.getElementById('api-body-raw').value = '';
-    document.getElementById('api-body-binary').value = '';
-    document.getElementById('api-body-graphql-query').value = '';
-    document.getElementById('api-body-graphql-variables').value = '';
+    const bodyTypeSelect = document.getElementById('body-type');
+    if (bodyTypeSelect) {
+        bodyTypeSelect.value = 'none';
+        updateBodyInput();
+        updateBodyTypeTabs('none');
+    }
 
-    // Reset form data fields
+    // Reset all body input values
+    const bodyInputs = {
+        'api-body-json': '',
+        'api-body-raw': '',
+        'raw-content-type': 'text/plain'
+    };
+
+    Object.entries(bodyInputs).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.value = value;
+        }
+    });
+
+    // Reset form data and URL encoded fields
     const formDataFields = document.getElementById('form-data-fields');
-    formDataFields.innerHTML = `
-        <div class="row mb-2">
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Key" name="form-data-key">
-            </div>
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Value" name="form-data-value">
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-danger" onclick="removeFormData(this)">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-        </div>
-    `;
-
-    // Reset URL encoded fields
     const urlEncodedFields = document.getElementById('urlencoded-fields');
-    urlEncodedFields.innerHTML = `
-        <div class="row mb-2">
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Key" name="urlencoded-key">
-            </div>
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Value" name="urlencoded-value">
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-danger" onclick="removeUrlEncoded(this)">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-        </div>
-    `;
+    
+    if (formDataFields) formDataFields.innerHTML = '';
+    if (urlEncodedFields) urlEncodedFields.innerHTML = '';
 
     // Hide response section
-    document.getElementById('api-response').style.display = 'none';
-
-    // Update body input visibility
-    updateBodyInput();
+    const responseSection = document.getElementById('api-response');
+    if (responseSection) responseSection.style.display = 'none';
 }
 
-// Show the API call section
+// Show API call section
 function showApiCallSection() {
     switchMainContent("api");
     resetApiCallFields();
@@ -486,4 +461,66 @@ document.addEventListener('DOMContentLoaded', () => {
     apiCallButton.innerHTML = '<i class="fa-solid fa-code"></i> Record API Response';
     apiCallButton.onclick = showApiCallSection;
     welcomeSection.appendChild(apiCallButton);
+
+    // Initialize API form event listeners
+    const apiForm = document.getElementById('api-form');
+    if (apiForm) {
+        apiForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await makeApiCall();
+        });
+
+        // Add initial header and parameter rows
+        addHeader();
+        addParam();
+
+        // Add event listeners for body type changes
+        const bodyTypeSelect = document.getElementById('body-type');
+        if (bodyTypeSelect) {
+            bodyTypeSelect.addEventListener('change', (e) => {
+                updateBodyInput();
+                updateBodyTypeTabs(e.target.value);
+            });
+        }
+
+        // Add event listeners for body type tabs
+        const bodyTypeTabs = document.querySelectorAll('.body-type-tabs button');
+        bodyTypeTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                const bodyType = e.target.dataset.bodyType;
+                if (bodyTypeSelect) {
+                    bodyTypeSelect.value = bodyType;
+                }
+                updateBodyInput();
+                updateBodyTypeTabs(bodyType);
+            });
+        });
+    }
 });
+
+function updateBodyTypeTabs(selectedType) {
+    const tabs = document.querySelectorAll('.body-type-tabs button');
+    tabs.forEach(tab => {
+        if (tab.dataset.bodyType === selectedType) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+}
+
+function formatJson() {
+    const jsonTextarea = document.getElementById('api-body-json');
+    if (!jsonTextarea) return;
+
+    try {
+        // Parse the JSON to validate it
+        const jsonObj = JSON.parse(jsonTextarea.value);
+        // Format it with proper indentation
+        const formattedJson = JSON.stringify(jsonObj, null, 2);
+        // Update the textarea with formatted JSON
+        jsonTextarea.value = formattedJson;
+    } catch (error) {
+        showError('Invalid JSON: ' + error.message);
+    }
+}

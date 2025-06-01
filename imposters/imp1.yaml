@@ -6,6 +6,7 @@ predicates:
   - predicate:
       method: GET
       path: /users/$id
+      delay: 1ms
       force_response: 400
     responses:
       - response:

@@ -24,6 +24,10 @@
     --shadowHoverColor: rgba(0, 0, 0, 0.3);
 }
 
+.btn {
+    color: black;
+}
+
 /* Base styles */
 .card, .list-group-item, .accordion-button, .accordion-body {
     background-color: var(--cardBg);
@@ -254,6 +258,10 @@
     background-color: var(--cardBg);
 }
 
+.dark-mode .btn {
+    color: white;
+}
+
 .dark-mode .form-section {
     background-color: rgba(255, 255, 255, 0.05);
 }
@@ -412,9 +420,9 @@
 }
 
 html, body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 body {
@@ -422,6 +430,7 @@ body {
     background-size: 400% 400%;
     min-height: 100vh;
     transition: background 2s ease-in-out;
+    position: relative;
 }
 
 @keyframes gradientBG {
@@ -855,8 +864,127 @@ pre {
 }
 
 .container-fluid {
-    background: rgba(232, 225, 225, 0.36);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.row {
+    margin: 0;
+}
+
+/* Sidebar scrolling */
+#sidebar {
+    height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    padding-bottom: 2rem;
+}
+
+#imposter-list {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+/* Main content scrolling */
+#main-content,
+#main-content-test,
+#main-content-api {
+    height: 100vh;
+    overflow-y: auto;
+    padding-bottom: 2rem;
+}
+
+/* Responsive scrolling adjustments */
+@media (max-width: 992px) {
+    html, body {
+        overflow-x: hidden;
+    }
+
+    .container-fluid {
+        min-height: auto;
+    }
+
+    .row {
+        min-height: auto;
+    }
+
+    #sidebar {
+        height: auto;
+        position: relative;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    #imposter-list {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    #main-content,
+    #main-content-test,
+    #main-content-api {
+        height: auto;
+        min-height: calc(100vh - 200px);
+        overflow-y: visible;
+    }
+
+    .welcome-container {
+        min-height: calc(100vh - 2rem);
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    #sidebar {
+        padding-bottom: 1rem;
+    }
+
+    #main-content,
+    #main-content-test,
+    #main-content-api {
+        padding-bottom: 1rem;
+    }
+
+    .welcome-container {
+        padding: 1rem;
+    }
+}
+
+/* Fix for content sections */
+.scrollable {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Fix for modals */
+.modal {
+    overflow-y: auto;
+}
+
+.modal-dialog {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+}
+
+/* Fix for card content */
+.card {
+    overflow: hidden;
+}
+
+.card-body {
+    overflow-x: auto;
+}
+
+/* Fix for pre elements */
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    max-width: 100%;
 }
 
 /* Button Styles */
@@ -1384,4 +1512,216 @@ pre {
 .dark-mode textarea.form-control:-ms-input-placeholder {
     color: rgba(255, 255, 255, 0.5);
     opacity: 1;
+}
+
+/* Responsive Layout */
+@media (max-width: 992px) {
+    .container-fluid {
+        padding: 0.5rem;
+    }
+
+    #sidebar {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+        margin-bottom: 1rem;
+    }
+
+    #main-content,
+    #main-content-test,
+    #main-content-api {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .welcome-container {
+        padding: 2rem 1rem;
+    }
+
+    .welcome-container h1 {
+        font-size: 2rem;
+    }
+
+    .welcome-container p {
+        font-size: 1rem;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .d-flex.justify-content-between .btn {
+        width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-col-6 {
+        width: 100%;
+        padding: 0;
+    }
+
+    .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+
+    .accordion-button {
+        padding: 0.75rem;
+    }
+
+    .accordion-body {
+        padding: 0.75rem;
+    }
+
+    .btn-group {
+        width: 100%;
+        display: flex;
+    }
+
+    .btn-group .btn {
+        flex: 1;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-fluid {
+        padding: 0.25rem;
+    }
+
+    .welcome-container {
+        padding: 1rem;
+    }
+
+    .welcome-container h1 {
+        font-size: 1.75rem;
+    }
+
+    .welcome-container p {
+        font-size: 0.9rem;
+    }
+
+    .card-header {
+        padding: 0.75rem;
+    }
+
+    .card-body {
+        padding: 0.75rem;
+    }
+
+    .form-control,
+    .form-select {
+        padding: 0.5rem;
+    }
+
+    .btn {
+        padding: 0.4rem 0.75rem;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 0.75rem;
+    }
+
+    .response-section {
+        padding: 0.5rem;
+    }
+}
+
+/* Fix for mobile scrolling */
+@media (max-width: 992px) {
+    .scrollable {
+        height: auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+    }
+
+    #imposter-list {
+        height: auto !important;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+}
+
+/* Improve form responsiveness */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .form-group {
+        margin-bottom: 0.75rem;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .input-group > * {
+        width: 100% !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .input-group > *:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Improve table responsiveness */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Improve modal responsiveness */
+.modal-dialog {
+    margin: 0.5rem;
+    max-width: calc(100% - 1rem);
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        margin: 1.75rem auto;
+        max-width: 500px;
+    }
+}
+
+@media (min-width: 992px) {
+    .modal-dialog {
+        max-width: 800px;
+    }
+}
+
+/* Improve button group responsiveness */
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+@media (max-width: 576px) {
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+        border-radius: 0.25rem !important;
+        margin-bottom: 0.25rem;
+    }
+
+    .btn-group .btn:last-child {
+        margin-bottom: 0;
+    }
 }
