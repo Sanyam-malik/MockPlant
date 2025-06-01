@@ -99,7 +99,7 @@ jobs:
             curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
           fi
 
-          trivy image --no-progress --exit-code 1 \
+          trivy image --no-progress --exit-code 1 --json \
             ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ needs.version-bump.outputs.new_tag }} || \
             echo "Trivy scan found vulnerabilities. Review above results."
 
