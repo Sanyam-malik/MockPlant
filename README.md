@@ -62,6 +62,8 @@ docker-compose logs -f
 
 The container will automatically restart unless explicitly stopped.
 
+> **Note:** You can also use this image also https://hub.docker.com/r/sanyammalik/mockplant instead of building it.
+
 ## Usage
 
 1. Start the server:
