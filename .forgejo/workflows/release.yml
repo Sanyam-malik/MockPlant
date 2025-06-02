@@ -73,6 +73,13 @@ jobs:
           git tag ${{ steps.bump.outputs.new_tag }}
           git push origin release --follow-tags
 
+      - name: Mirror All Branches and Tags to GitHub
+        env:
+          GITHUB_MIRROR_URL: ${{ secrets.GIT_MIRROR }}
+        run: |
+          git remote add github "$GITHUB_MIRROR_URL"
+          git push --mirror github
+
   docker-build:
     name: Build and Push Docker Image
     runs-on: neo-ubuntu
