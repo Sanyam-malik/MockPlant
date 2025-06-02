@@ -4,7 +4,6 @@ FROM python:3.9-alpine
 # Set the image name and labels
 LABEL maintainer="Sanyam Malik"
 LABEL description="MockPlant"
-LABEL version="1.0"
 LABEL image_name="mockplant"
 LABEL tag="latest"
 
