@@ -3,7 +3,7 @@ name: Build Docker Image
 on:
   push:
     branches:
-      - main
+      - release
 
 env:
   DOCKER_REGISTRY: sanyammalik
