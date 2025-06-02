@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  DOCKER_REGISTRY: registry.local
+  DOCKER_REGISTRY: sanyammalik
   DOCKER_IMAGE: mockplant
 
 jobs:
