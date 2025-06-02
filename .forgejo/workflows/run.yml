@@ -71,7 +71,7 @@ jobs:
           git add VERSION
           git commit -m "chore: bump version to ${{ steps.bump.outputs.new_tag }}"
           git tag ${{ steps.bump.outputs.new_tag }}
-          git push origin main --follow-tags
+          git push origin release --follow-tags
 
   docker-build:
     name: Build and Push Docker Image
