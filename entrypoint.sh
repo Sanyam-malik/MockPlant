@@ -9,3 +9,4 @@ touch /app/logs/mockplant.log
 
 # Keep the container running
 tail -f /app/logs/mockplant.log
+
