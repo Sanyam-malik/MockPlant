@@ -138,7 +138,7 @@ def match_header_conditions(headers: dict, condition: dict):
     for key, value in headers.items():
         headers[key] = str(value).split(";")[0]
 
-    return match_conditions(headers, {key.title(): value for key, value in condition.items()})
+    return match_conditions({key.title(): value for key, value in headers.items()}, {key.title(): value for key, value in condition.items()})
 
 
 def match_body_conditions(body: Any, condition: dict) -> bool:

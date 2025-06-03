@@ -1,3 +1,4 @@
+from asgiref.wsgi import WsgiToAsgi
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -80,7 +81,6 @@ def get_thread_count():
 
 def run_server():
     system = platform.system().lower()
-    system = 'windows'
     app.logger.info('Starting server on %s platform', system)
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -105,22 +105,19 @@ def run_server():
         subprocess.run(cmd)
 
     elif system == 'windows':
-        # Use Waitress on Windows
-        from waitress import serve
-        setup_logging()  # Local logging for Waitress
-        app.logger.info('Starting Waitress server')
-        serve(
-            app,
-            host='0.0.0.0',
+        # Use Uvicorn on Windows
+        import uvicorn
+        asgi_app = WsgiToAsgi(app)
+        uvicorn.run(
+            asgi_app,  # Replace with actual import path, e.g. main:app
+            host="0.0.0.0",
             port=HTTP_PORT,
-            threads=16,
-            url_scheme='http',
-            channel_timeout=120,
-            cleanup_interval=30,
-            max_request_header_size=262144,
-            max_request_body_size=1073741824,
-            ident='MockPlant',
-            connection_limit=1000
+            log_level="debug",
+            workers=1,  # Uvicorn uses async workers by default, increase for multi-process
+            timeout_keep_alive=120,
+            limit_concurrency=1000,
+            limit_max_requests=1000,
+            headers=[("Server", "MockPlant")],
         )
     else:
         app.logger.error(f"Unsupported OS: {system}")
