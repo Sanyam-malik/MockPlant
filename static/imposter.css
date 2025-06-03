@@ -28,6 +28,12 @@
     color: black;
 }
 
+.btn.btn-body.active {
+    color: white;
+    background: #6f42c1;
+}
+
+
 /* Base styles */
 .card, .list-group-item, .accordion-button, .accordion-body {
     background-color: var(--cardBg);
@@ -1481,7 +1487,8 @@ pre {
 }
 
 .btn-group .btn:hover {
-    background: var(--cardHoverBg);
+    background: #6f42c1;
+    color: white;
     transform: none;
     box-shadow: none;
 }

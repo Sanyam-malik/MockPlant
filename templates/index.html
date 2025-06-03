@@ -84,13 +84,12 @@
       <!-- API Call Section -->
       <div class="col-lg-9 col-md-12 scrollable" id="main-content-api">
         <div class="px-2">
-          <h1 class="mt-3 mb-4">API Call</h1>
+          <h1 class="mt-3 mb-4">Record Imposter</h1>
           <div class="card mb-4">
-            <div class="card-header">Make API Call</div>
             <div class="card-body">
               <form id="api-form">
                 <div class="row g-3">
-                  <div class="col-md-4">
+                  <div class="col-md-1">
                     <select class="form-select" id="api-method">
                       <option value="GET">GET</option>
                       <option value="POST">POST</option>
@@ -98,7 +97,7 @@
                       <option value="DELETE">DELETE</option>
                     </select>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-11">
                     <input type="text" class="form-control" id="api-url" placeholder="Enter URL">
                   </div>
                 </div>
@@ -139,12 +138,12 @@
                   <!-- Body Type Tabs -->
                   <div class="body-type-tabs mb-3">
                     <div class="btn-group w-100" role="group">
-                      <button type="button" class="btn active" data-body-type="none">None</button>
-                      <button type="button" class="btn" data-body-type="json">JSON</button>
-                      <button type="button" class="btn" data-body-type="form-data">Form Data</button>
-                      <button type="button" class="btn" data-body-type="x-www-form-urlencoded">URL Encoded</button>
-                      <button type="button" class="btn" data-body-type="raw">Raw</button>
-                      <button type="button" class="btn" data-body-type="binary">Binary</button>
+                      <button type="button" class="btn btn-body active" data-body-type="none">None</button>
+                      <button type="button" class="btn btn-body " data-body-type="json">JSON</button>
+                      <button type="button" class="btn btn-body" data-body-type="form-data">Form Data</button>
+                      <button type="button" class="btn btn-body" data-body-type="x-www-form-urlencoded">URL Encoded</button>
+                      <button type="button" class="btn btn-body" data-body-type="raw">Raw</button>
+                      <button type="button" class="btn btn-body" data-body-type="binary">Binary</button>
                     </div>
                   </div>
                   
@@ -155,7 +154,7 @@
                         <i class="fa-solid fa-code"></i> Format JSON
                       </button>
                     </div>
-                    <textarea class="form-control" id="api-body-json" rows="5" placeholder="Enter JSON body"></textarea>
+                    <textarea class="form-control" id="api-body-json" rows="5" onfocus="autoResize(this)" placeholder="Enter JSON body"></textarea>
                   </div>
 
                   <!-- Form Data Body -->
@@ -191,7 +190,7 @@
                         <option value="text/javascript">JavaScript</option>
                       </select>
                     </div>
-                    <textarea class="form-control" id="api-body-raw" rows="5" placeholder="Enter raw body"></textarea>
+                    <textarea class="form-control" id="api-body-raw" onfocus="autoResize(this)" rows="5" placeholder="Enter raw body"></textarea>
                   </div>
 
                   <!-- Binary Body -->
@@ -236,6 +235,7 @@
       </div>
     </div>
   </div>
+
   <script src="{{ url_for('static', filename='js/common.js') }}"></script>
   <script src="{{ url_for('static', filename='js/api.js') }}"></script>
   <script src="{{ url_for('static', filename='js/utils.js') }}"></script>

@@ -1,7 +1,12 @@
+import json
+import urllib
+from urllib.parse import urlparse
+
 import requests
 from typing import Optional, Dict, Any, Union
 from requests.structures import CaseInsensitiveDict
 
+from entity.imposter_model import Imposter, ImposterMetadata, Predicate, ResponseEntry, Response
 from services.constant_service import VALID_HTTP_METHODS
 
 
@@ -20,13 +25,8 @@ def call_api(
         params: Optional[Dict[str, Any]] = None,
         body: Optional[Union[Dict[str, Any], str, bytes]] = None,
         body_type: Optional[str] = None
-) -> Dict[str, Any]:
+) -> Imposter:
     """Performs an HTTP request and returns a structured response."""
-
-    method = method.upper()
-    if method not in VALID_HTTP_METHODS:
-        return {"error": f"Unsupported HTTP method: {method}"}
-
     request_func = getattr(requests, method.lower())
     full_url = build_url(url, variables)
 
@@ -41,7 +41,6 @@ def call_api(
 
     # Handle different body types
     if body is not None and method in ['POST', 'PUT', 'PATCH']:
-        content_type = headers.get('Content-Type', '').lower()
         
         if body_type == 'form-data':
             # Handle form-data
@@ -71,11 +70,8 @@ def call_api(
             request_kwargs['json'] = body
 
     response = request_func(full_url, **request_kwargs)
-
-    response_data = {
-        "code": response.status_code,
-        "content": response.text
-    }
+    url_path = urlparse(url).path
+    status_code = response.status_code
 
     when_data = {}
     if headers:
@@ -84,13 +80,14 @@ def call_api(
         when_data["query"] = params
     if body:
         when_data["body"] = body
-    if when_data:
-        response_data["when"] = when_data
 
-    return {
-        "predicate": {
-            "method": method,
-            "path": url
-        },
-        "responses": [{"response": response_data}]
-    }
+    response_headers = dict(response.headers)
+    content_type = response_headers.get('Content-Type', None).split(";")[0].lower()
+    if 'Content-Type' in response_headers:
+        response_headers.pop('Content-Type')
+    #response_text = json.loads(response.text) if content_type == "application/json" else response.text
+    response_text = response.text
+    response_entity = ResponseEntry(when=when_data, response=Response(headers=response_headers, code=status_code, content=response_text, content_type=content_type))
+    metadata = ImposterMetadata(name=f"Imposter for {url_path}", description=f"Auto-generated imposter for {method} {url_path}", type="HTTP")
+    predicates = [Predicate(method=method, path=url_path, responses=[response_entity])]
+    return Imposter(imposter=metadata, predicates=predicates)

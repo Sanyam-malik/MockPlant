@@ -61,7 +61,24 @@ function showPredicates(index) {
 
     if (imposter.predicates.length === 0) {
         list.innerHTML = '<li class="list-group-item py-3 px-3">No predicates found.</li>';
+        
+        // Add the "Add Predicate" button at the bottom
+        const addButtonContainer = document.createElement('div');
+        addButtonContainer.className = 'mt-4';
+        addButtonContainer.innerHTML = `
+            <button class="btn btn-purple add-predicate" data-index="${index}">
+                <i class="fa-solid fa-plus"></i> Add Predicate
+            </button>
+        `;
+        list.appendChild(addButtonContainer);
+
+        // Add event listeners for edit and delete buttons
         setupImposterListeners(imposter, index);
+
+        // Add event listener for the Add Predicate button
+        document.querySelector('.add-predicate').addEventListener('click', () => {
+            showAddPredicateModal(index);
+        });
         return;
     }
 
@@ -728,6 +745,116 @@ async function createImposter(formData) {
     }
 }
 
+async function makeApiCall() {
+    const method = document.getElementById('api-method').value;
+    const baseUrl = document.getElementById('api-url').value;
+    const bodyType = document.getElementById('body-type').value;
+    const headers = getHeaders();
+    const params = getParams();
+
+    if (!baseUrl) {
+        showError('Please enter a URL');
+        return;
+    }
+
+    const options = {
+        method,
+        headers: {
+            ...headers
+        }
+    };
+
+    // Handle different body types
+    if (bodyType !== 'none' && (method === 'POST' || method === 'PUT')) {
+        switch (bodyType) {
+            case 'json':
+                const jsonBody = document.getElementById('api-body-json').value;
+                if (jsonBody) {
+                    try {
+                        options.body = JSON.stringify(JSON.parse(jsonBody));
+                        options.headers['Content-Type'] = 'application/json';
+                    } catch (e) {
+                        showError('Invalid JSON in request body');
+                        return;
+                    }
+                }
+                break;
+
+            case 'form-data':
+                const formData = getFormData();
+                if (Object.keys(formData).length > 0) {
+                    const formDataObj = new FormData();
+                    Object.entries(formData).forEach(([key, value]) => {
+                        formDataObj.append(key, value);
+                    });
+                    options.body = formDataObj;
+                    // Don't set Content-Type header for FormData, browser will set it automatically
+                }
+                break;
+
+            case 'x-www-form-urlencoded':
+                const urlEncoded = getUrlEncoded();
+                if (Object.keys(urlEncoded).length > 0) {
+                    options.body = new URLSearchParams(urlEncoded).toString();
+                    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                }
+                break;
+
+            case 'raw':
+                const rawBody = document.getElementById('api-body-raw').value;
+                const rawContentType = document.getElementById('raw-content-type').value;
+                if (rawBody) {
+                    options.body = rawBody;
+                    options.headers['Content-Type'] = rawContentType;
+                }
+                break;
+
+            case 'binary':
+                const fileInput = document.getElementById('api-body-binary');
+                if (fileInput.files.length > 0) {
+                    options.body = fileInput.files[0];
+                    // Don't set Content-Type header for binary, browser will set it automatically
+                }
+                break;
+        }
+    }
+
+    try {
+        // Record the response
+        const apiResponse = await fetchData('/_record', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                method,
+                url: baseUrl,
+                variables: {},  // Add if needed
+                headers,
+                params,
+                body: options.body,
+                body_type: bodyType
+            })
+        }, "Recording API Response....");
+
+        // Save the recorded response to localStorage
+        localStorage.setItem('recorded_response', JSON.stringify(apiResponse));
+
+        resp_status_code = apiResponse["predicates"][0]["responses"][0]["response"]["code"]
+        resp_content_type = apiResponse["predicates"][0]["responses"][0]["response"]["content_type"]
+        resp_headers = apiResponse["predicates"][0]["responses"][0]["response"]["headers"]
+        resp_body = apiResponse["predicates"][0]["responses"][0]["response"]["content"]
+
+        // Display the response
+        document.getElementById('api-response').style.display = 'block';
+        document.getElementById('response-status').textContent = `${resp_status_code}`;
+        document.getElementById('response-headers').textContent = JSON.stringify(resp_headers, null, 2);
+        document.getElementById('response-body').textContent = resp_body;
+    } catch (error) {
+        showError(error.message);
+    }
+}
+
 async function runTests() {
     switchMainContent("test");
     const testSection = document.getElementById('main-content-test');
@@ -932,6 +1059,7 @@ function showAddPredicateModal(imposterIndex) {
                         <div class="mb-2">
                             <label class="form-label">Status Code</label>
                             <select class="form-select" name="responseCode">
+                                <option value="">Select Status Code</option>
                                 <option value="200">200 OK</option>
                                 <option value="201">201 Created</option>
                                 <option value="400">400 Bad Request</option>
@@ -959,10 +1087,22 @@ function showAddPredicateModal(imposterIndex) {
             const form = document.getElementById('addPredicateForm');
             const formData = new FormData(form);
             
+            // Validate required fields
+            const path = formData.get('path');
+            if (!path || path.trim() === '') {
+                showCommonModal({
+                    title: 'Error',
+                    message: 'Path is required for a predicate.',
+                    type: 'danger',
+                    confirmText: 'OK'
+                });
+                return;
+            }
+
             // Create new predicate
             const newPredicate = {
                 method: formData.get('method'),
-                path: formData.get('path'),
+                path: path.trim(),
                 force_response: formData.get('force_response') ? parseInt(formData.get('force_response')) : undefined
             };
 
@@ -975,10 +1115,14 @@ function showAddPredicateModal(imposterIndex) {
             // Add default response if specified
             const responseContent = formData.get('responseContent');
             if (responseContent) {
-                newPredicate.response = {
-                    code: parseInt(formData.get('responseCode')),
-                    content: responseContent
-                };
+                newPredicate.responses = [{
+                    response: {
+                        code: parseInt(formData.get('responseCode')),
+                        content: responseContent,
+                        content_type: 'text/plain',
+                        headers: {}
+                    }
+                }];
             }
 
             // Get current imposter data
@@ -1015,7 +1159,8 @@ function showAddPredicateModal(imposterIndex) {
 }
 
 function showCreateImposterModal(prefilledData = null) {
-    const modal = new bootstrap.Modal(document.getElementById('createImposterModal'));
+    // Get the modal element
+    const modalElement = document.getElementById('createImposterModal');
     
     // Reset form
     document.getElementById('createImposterForm').reset();
@@ -1066,5 +1211,546 @@ function showCreateImposterModal(prefilledData = null) {
         }
     }
     
+    // Create a new modal instance if it doesn't exist
+    let modal = bootstrap.Modal.getInstance(modalElement);
+    if (!modal) {
+        modal = new bootstrap.Modal(modalElement);
+    }
+    
+    // Show the modal
     modal.show();
+}
+
+async function submitCreateImposter() {
+    const form = document.getElementById('createImposterForm');
+    const formData = {
+        imposter: {
+            name: document.getElementById('imposterName').value,
+            description: document.getElementById('imposterDescription').value,
+            type: document.getElementById('imposterType').value
+        },
+        predicates: []
+    };
+
+    // Get predicates from the form
+    const predicateSections = document.querySelectorAll('#predicatesAccordion .predicate-section');
+    predicateSections.forEach(section => {
+        const predicate = {
+            method: section.querySelector('[name="method"]').value,
+            path: section.querySelector('[name="path"]').value,
+            query: JSON.parse(section.querySelector('[name="query"]').value || '{}'),
+            headers: JSON.parse(section.querySelector('[name="headers"]').value || '{}'),
+            body: JSON.parse(section.querySelector('[name="body"]').value || '{}')
+        };
+        formData.predicates.push(predicate);
+    });
+
+    // Get responses from the form
+    const responseSections = document.querySelectorAll('#responsesAccordion .response-section');
+    responseSections.forEach(section => {
+        const response = {
+            statusCode: parseInt(section.querySelector('[name="statusCode"]').value),
+            headers: JSON.parse(section.querySelector('[name="headers"]').value || '{}'),
+            body: JSON.parse(section.querySelector('[name="body"]').value || '{}')
+        };
+        if (formData.predicates.length > 0) {
+            if (!formData.predicates[0].responses) {
+                formData.predicates[0].responses = [];
+            }
+            formData.predicates[0].responses.push(response);
+        }
+    });
+
+    const success = await createImposter(formData);
+    if (success) {
+        const modal = bootstrap.Modal.getInstance(document.getElementById('createImposterModal'));
+        modal.hide();
+        form.reset();
+    }
+}
+
+function addPredicateSection() {
+    const accordion = document.getElementById('predicatesAccordion');
+    const section = document.createElement('div');
+    section.className = 'predicate-section mb-3';
+    section.innerHTML = `
+        <div class="mb-2">
+            <label class="form-label">Method</label>
+            <select class="form-select" name="method" required>
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+            </select>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Path</label>
+            <input type="text" class="form-control" name="path" required placeholder="/example/path">
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Query Parameters (JSON)</label>
+            <textarea class="form-control" name="query" rows="2" placeholder="{}"></textarea>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Headers (JSON)</label>
+            <textarea class="form-control" name="headers" rows="2" placeholder="{}"></textarea>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Body (JSON)</label>
+            <textarea class="form-control" name="body" rows="2" placeholder="{}"></textarea>
+        </div>
+    `;
+    accordion.appendChild(section);
+    return section;
+}
+
+function addResponseSection() {
+    const accordion = document.getElementById('responsesAccordion');
+    const section = document.createElement('div');
+    section.className = 'response-section mb-3';
+    section.innerHTML = `
+        <div class="mb-2">
+            <label class="form-label">Status Code</label>
+            <select class="form-select" name="statusCode" required>
+                <option value="200">200 OK</option>
+                <option value="201">201 Created</option>
+                <option value="400">400 Bad Request</option>
+                <option value="404">404 Not Found</option>
+                <option value="500">500 Internal Server Error</option>
+            </select>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Headers (JSON)</label>
+            <textarea class="form-control" name="headers" rows="2" placeholder="{}"></textarea>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Body (JSON)</label>
+            <textarea class="form-control" name="body" rows="2" placeholder="{}"></textarea>
+        </div>
+    `;
+    accordion.appendChild(section);
+    return section;
+}
+
+async function createImposterFromResponse() {
+    // Get the recorded response from localStorage
+    const recordedResponse = JSON.parse(localStorage.getItem('recorded_response'));
+    if (!recordedResponse) {
+        showCommonModal({
+            title: 'Error',
+            message: 'No recorded response found. Please make an API call first.',
+            type: 'danger',
+            confirmText: 'OK'
+        });
+        return;
+    }
+
+    // Show the create imposter modal with just name and description fields
+    showCommonModal({
+        title: 'Create Imposter',
+        message: `
+            <form id="createImposterForm">
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" id="imposterName" required value="${recordedResponse.imposter.name}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <input type="text" class="form-control" id="imposterDescription" value="${recordedResponse.imposter.description}">
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" class="form-check-input" id="keepResponseHeaders" checked>
+                    <label class="form-check-label" for="keepResponseHeaders">Keep Response Headers</label>
+                </div>
+            </form>
+        `,
+        type: 'purple',
+        confirmText: 'Create',
+        cancelText: 'Cancel',
+        onConfirm: async () => {
+            const name = document.getElementById('imposterName').value;
+            const description = document.getElementById('imposterDescription').value;
+            const keepHeaders = document.getElementById('keepResponseHeaders').checked;
+
+            if (!name) {
+                showCommonModal({
+                    title: 'Error',
+                    message: 'Please enter a name for the imposter.',
+                    type: 'danger',
+                    confirmText: 'OK'
+                });
+                return;
+            }
+
+            // Create the imposter data using the recorded response
+            const imposterData = {
+                imposter: {
+                    name: name,
+                    description: description,
+                    type: recordedResponse.imposter.type
+                },
+                predicates: recordedResponse.predicates.map(predicate => {
+                    // Create a copy of the predicate
+                    const newPredicate = { ...predicate };
+
+                    // If we're not keeping headers, remove them from responses
+                    if (!keepHeaders && newPredicate.responses) {
+                        newPredicate.responses = newPredicate.responses.map(response => {
+                            const newResponse = { ...response };
+                            if (newResponse.response) {
+                                newResponse.response = { ...newResponse.response };
+                                delete newResponse.response.headers;
+                            }
+                            return newResponse;
+                        });
+                    }
+
+                    return newPredicate;
+                })
+            };
+
+            const success = await createImposter(imposterData);
+            if (success) {
+                document.getElementById('createImposterForm').reset();
+            }
+        }
+    });
+}
+
+// Reset all API call fields to their default state
+function resetApiCallFields() {
+    // Reset method and URL
+    const methodSelect = document.getElementById('api-method');
+    const urlInput = document.getElementById('api-url');
+    if (methodSelect) methodSelect.value = 'GET';
+    if (urlInput) urlInput.value = '';
+
+    // Reset headers
+    const headersDiv = document.getElementById('api-headers');
+    if (headersDiv) {
+        headersDiv.innerHTML = `
+            <div class="row mb-2">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Key" name="header-key">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Value" name="header-value">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger" onclick="removeHeader(this)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // Reset parameters
+    const paramsDiv = document.getElementById('api-params');
+    if (paramsDiv) {
+        paramsDiv.innerHTML = `
+            <div class="row mb-2">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Key" name="param-key">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Value" name="param-value">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger" onclick="removeParam(this)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // Reset body type and all body inputs
+    const bodyTypeSelect = document.getElementById('body-type');
+    if (bodyTypeSelect) {
+        bodyTypeSelect.value = 'none';
+        updateBodyInput();
+        updateBodyTypeTabs('none');
+    }
+
+    // Reset all body input values
+    const bodyInputs = {
+        'api-body-json': '',
+        'api-body-raw': '',
+        'raw-content-type': 'text/plain'
+    };
+
+    Object.entries(bodyInputs).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.value = value;
+        }
+    });
+
+    // Reset form data and URL encoded fields
+    const formDataFields = document.getElementById('form-data-fields');
+    const urlEncodedFields = document.getElementById('urlencoded-fields');
+
+    if (formDataFields) formDataFields.innerHTML = '';
+    if (urlEncodedFields) urlEncodedFields.innerHTML = '';
+
+    // Hide response section
+    const responseSection = document.getElementById('api-response');
+    if (responseSection) responseSection.style.display = 'none';
+}
+
+// Show API call section
+function showApiCallSection() {
+    switchMainContent("api");
+    resetApiCallFields();
+}
+
+// Add API Call button to the welcome section
+document.addEventListener('DOMContentLoaded', () => {
+    const welcomeSection = document.getElementById('welcome-section');
+    const apiCallButton = document.createElement('button');
+    apiCallButton.className = 'btn btn-purple mt-2';
+    apiCallButton.innerHTML = '<i class="fa-solid fa-code"></i> Record API Response';
+    apiCallButton.onclick = showApiCallSection;
+    welcomeSection.appendChild(apiCallButton);
+
+    // Initialize API form event listeners
+    const apiForm = document.getElementById('api-form');
+    if (apiForm) {
+        apiForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await makeApiCall();
+        });
+
+        // Add initial header and parameter rows
+        addHeader();
+        addParam();
+
+        // Add event listeners for body type changes
+        const bodyTypeSelect = document.getElementById('body-type');
+        if (bodyTypeSelect) {
+            bodyTypeSelect.addEventListener('change', (e) => {
+                updateBodyInput();
+                updateBodyTypeTabs(e.target.value);
+            });
+        }
+
+        // Add event listeners for body type tabs
+        const bodyTypeTabs = document.querySelectorAll('.body-type-tabs button');
+        bodyTypeTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                const bodyType = e.target.dataset.bodyType;
+                if (bodyTypeSelect) {
+                    bodyTypeSelect.value = bodyType;
+                }
+                updateBodyInput();
+                updateBodyTypeTabs(bodyType);
+            });
+        });
+    }
+});
+
+function updateBodyTypeTabs(selectedType) {
+    const tabs = document.querySelectorAll('.body-type-tabs button');
+    tabs.forEach(tab => {
+        if (tab.dataset.bodyType === selectedType) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+}
+
+// API Call functionality
+function addHeader() {
+    const headersDiv = document.getElementById('api-headers');
+    if (!headersDiv) return;
+
+    const headerRow = document.createElement('div');
+    headerRow.className = 'row mb-2';
+    headerRow.innerHTML = `
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Key" name="header-key">
+        </div>
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Value" name="header-value">
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" onclick="removeHeader(this)">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    `;
+    headersDiv.appendChild(headerRow);
+}
+
+function removeHeader(button) {
+    button.closest('.row').remove();
+}
+
+function addParam() {
+    const paramsDiv = document.getElementById('api-params');
+    if (!paramsDiv) return;
+
+    const paramRow = document.createElement('div');
+    paramRow.className = 'row mb-2';
+    paramRow.innerHTML = `
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Key" name="param-key">
+        </div>
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Value" name="param-value">
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" onclick="removeParam(this)">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    `;
+    paramsDiv.appendChild(paramRow);
+}
+
+function removeParam(button) {
+    button.closest('.row').remove();
+}
+
+function getHeaders() {
+    const headers = {};
+    const headerRows = document.querySelectorAll('#api-headers .row');
+    headerRows.forEach(row => {
+        const key = row.querySelector('[name="header-key"]').value.trim();
+        const value = row.querySelector('[name="header-value"]').value.trim();
+        if (key && value) {
+            headers[key] = value;
+        }
+    });
+    return headers;
+}
+
+function getParams() {
+    const params = {};
+    const paramRows = document.querySelectorAll('#api-params .row');
+    paramRows.forEach(row => {
+        const key = row.querySelector('[name="param-key"]').value.trim();
+        const value = row.querySelector('[name="param-value"]').value.trim();
+        if (key && value) {
+            params[key] = value;
+        }
+    });
+    return params;
+}
+
+function buildUrl(baseUrl, params) {
+    const url = new URL(baseUrl);
+    Object.entries(params).forEach(([key, value]) => {
+        url.searchParams.append(key, value);
+    });
+    return url.toString();
+}
+
+function updateBodyInput() {
+    const bodyType = document.getElementById('body-type').value;
+
+    // Hide all body inputs first
+    document.querySelectorAll('.body-input').forEach(input => {
+        input.style.display = 'none';
+    });
+
+    // Show the selected body type input
+    if (bodyType !== 'none') {
+        const selectedBody = document.getElementById(`${bodyType}-body`);
+        if (selectedBody) {
+            selectedBody.style.display = 'block';
+        }
+    }
+}
+
+function addFormData() {
+    const fieldsDiv = document.getElementById('form-data-fields');
+    const fieldRow = document.createElement('div');
+    fieldRow.className = 'row mb-2';
+    fieldRow.innerHTML = `
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Key" name="form-data-key">
+        </div>
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Value" name="form-data-value">
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" onclick="removeFormData(this)">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    `;
+    fieldsDiv.appendChild(fieldRow);
+}
+
+function removeFormData(button) {
+    button.closest('.row').remove();
+}
+
+function addUrlEncoded() {
+    const fieldsDiv = document.getElementById('urlencoded-fields');
+    const fieldRow = document.createElement('div');
+    fieldRow.className = 'row mb-2';
+    fieldRow.innerHTML = `
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Key" name="urlencoded-key">
+        </div>
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Value" name="urlencoded-value">
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" onclick="removeUrlEncoded(this)">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    `;
+    fieldsDiv.appendChild(fieldRow);
+}
+
+function removeUrlEncoded(button) {
+    button.closest('.row').remove();
+}
+
+function getFormData() {
+    const formData = {};
+    const fields = document.querySelectorAll('#form-data-fields .row');
+    fields.forEach(field => {
+        const key = field.querySelector('[name="form-data-key"]').value.trim();
+        const value = field.querySelector('[name="form-data-value"]').value.trim();
+        if (key && value) {
+            formData[key] = value;
+        }
+    });
+    return formData;
+}
+
+function getUrlEncoded() {
+    const urlEncoded = {};
+    const fields = document.querySelectorAll('#urlencoded-fields .row');
+    fields.forEach(field => {
+        const key = field.querySelector('[name="urlencoded-key"]').value.trim();
+        const value = field.querySelector('[name="urlencoded-value"]').value.trim();
+        if (key && value) {
+            urlEncoded[key] = value;
+        }
+    });
+    return urlEncoded;
+}
+
+function formatJson() {
+    const jsonTextarea = document.getElementById('api-body-json');
+    if (!jsonTextarea) return;
+
+    try {
+        // Parse the JSON to validate it
+        const jsonObj = JSON.parse(jsonTextarea.value);
+        // Format it with proper indentation
+        const formattedJson = JSON.stringify(jsonObj, null, 2);
+        // Update the textarea with formatted JSON
+        jsonTextarea.value = formattedJson;
+    } catch (error) {
+        showError('Invalid JSON: ' + error.message);
+    }
 }

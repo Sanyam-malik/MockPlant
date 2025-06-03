@@ -2,7 +2,7 @@ import json
 from flask import Blueprint, request, jsonify, render_template
 
 from services.api_call_service import call_api
-from services.constant_service import AUTO_CREATE_TESTS
+from services.constant_service import AUTO_CREATE_TESTS, VALID_HTTP_METHODS
 from services.loading_service import load_yaml_imposters, parse_imposter_yaml, \
     save_imposter, delete_imposter, reload_imposters
 from services.handler_service import handle_request
@@ -91,13 +91,14 @@ def record():
     if not method or not url:
         return jsonify({"error": "Both 'method' and 'url' are required."}), 400
 
+    method = method.upper()
+    if method not in VALID_HTTP_METHODS:
+        return jsonify({"error": f"Unsupported HTTP method: {method}"}), 400
+
     # Make the API call and get the response
     result = call_api(method, url, variables, headers, params, body, body_type)
     
-    # Convert the result to YAML format
-    yaml_result = json_to_yaml(json.dumps(result, indent=2))
-    
-    return yaml_result, 200
+    return jsonify(result), 200
 
 # General route to handle requests, using the service for matching
 @api_bp.route('/', defaults={'path': ''}, methods=["GET", "POST", "PUT", "DELETE"])
